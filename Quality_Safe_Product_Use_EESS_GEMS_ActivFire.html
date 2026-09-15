@@ -342,6 +342,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <button class="tab" role="tab" aria-selected="false" data-tab="acro"><span class="em">🔤</span>Acronyms</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="iso"><span class="em">🧪</span>ISO Standards</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="teststd"><span class="em">🔬</span>Test Standards</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="emc"><span class="em">📡</span>EMC &amp; EMI</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="exp"><span class="em">💼</span>My Experience</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="cheat"><span class="em">📚</span>Cheat Sheet</button>
     </div>
@@ -861,6 +862,71 @@ td.mono{font-family:var(--font-m);font-size:12px}
       </table>
     </div>
     <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>Interview line:</b> "One product, two questions — which <b>Part 2</b> of the safety standard applies, and what's the <b>EMC</b> pathway. A fan is 60335.1 + 60335.2.80; a PDU is 62368.1 + CISPR 32. Classify first, then test."</div></div>
+  </section>
+
+  <!-- ============ PANEL: EMC & EMI ============ -->
+  <section class="panel" role="tabpanel" id="panel-emc" hidden>
+    <h2>📡 EMC &amp; EMI — the invisible half of the RCM</h2>
+    <p class="subhead">When electrical equipment creates invisible energy that messes with or disrupts other nearby gadgets, it is called <b>Electromagnetic Interference (EMI)</b> — commonly referred to as <b>Radio-Frequency Interference (RFI)</b> when it happens in the radio band. To stop this, companies put their products through a process called <b>Electromagnetic Compatibility (EMC) Testing</b> — and in Australia, that's the EMC half of the RCM (ACMA).</p>
+
+    <div class="grid g3">
+      <div class="card lv l3"><span class="lv-n" style="color:var(--eess)">📡 EMI / RFI</span><h3>The problem</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Invisible energy radiated or conducted from electronics</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Disrupts nearby gadgets: radio crackle, TV pixelation, sensor misreads, dropped Wi-Fi</li>
+          <li style="font-size:12.5px;color:var(--ink-2)"><b>RFI</b> = EMI in the radio-frequency band (the spectrum regulators police)</li>
+        </ul>
+      </div>
+      <div class="card lv l2"><span class="lv-n" style="color:var(--gems)">🧪 EMC testing</span><h3>The fix</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><b>Emissions:</b> prove your product doesn't leak disruptive energy above legal limits</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><b>Immunity:</b> prove it keeps working when other products leak into it</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Both halves tested in an accredited lab (shielded chamber / anechoic room) — then the RCM</li>
+        </ul>
+      </div>
+      <div class="card lv l1"><span class="lv-n" style="color:var(--brand)">🇦🇺 Why it matters here</span><h3>ACMA owns the EMC half</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">The RCM = electrical safety (EESS) <b>+ EMC (ACMA)</b> — one mark, two obligations</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Wireless products (Wi-Fi/Zigbee/BLE) add radiocommunications compliance on top</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">EMC failure = non-compliance even if the safety tests pass</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin:22px 0 0;font-size:15px">The EMC test family — what gets tested</h3>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Test</th><th>What it checks</th><th>Legrand products where it bites</th></tr></thead>
+        <tbody>
+          <tr><td class="mono"><b>Conducted emissions</b></td><td>Noise leaking back down the power cable into the mains</td><td>LED dimmers, PDUs, power supplies — anything switching power</td></tr>
+          <tr><td class="mono"><b>Radiated emissions</b></td><td>Noise broadcast through the air</td><td>Smart hubs with Wi-Fi, fan controls, UPS</td></tr>
+          <tr><td class="mono"><b>Harmonic emissions</b></td><td>Distortion of the mains waveform by power electronics</td><td>UPS, LED drivers, VSD-driven fans</td></tr>
+          <tr><td class="mono"><b>ESD immunity</b></td><td>Surviving static shocks (human touch)</td><td>Wall plates, touch dimmers, Arteor mechanisms</td></tr>
+          <tr><td class="mono"><b>Surge &amp; burst immunity</b></td><td>Surviving mains spikes and switching transients</td><td>PDUs, RCBOs' electronics, connected devices</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin:22px 0 0;font-size:15px">Standards cheat card</h3>
+    <div class="grid g2">
+      <div class="card"><h3>Emissions side</h3><span class="code">AS/NZS CISPR 32 — multimedia equipment</span>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><span class="mono">CISPR 14.1</span> — household appliances</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><span class="mono">CISPR 11</span> — industrial/scientific/medical equipment</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">The "CISPR 32" you quote for IT/AV is the emissions half</li>
+        </ul>
+      </div>
+      <div class="card"><h3>Immunity side</h3><span class="code">AS/NZS CISPR 35 — multimedia equipment</span>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><span class="mono">CISPR 14.2</span> — household appliances</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><span class="mono">IEC 61000-4-x</span> — the generic immunity test series (ESD, surge, EFT)</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Emissions + immunity = the complete EMC story</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>Interview line:</b> "EMC is the half of the RCM people forget. A product that's electrically safe but radiates noise into the hospital bed next door is not compliant. Emissions out, immunity in — tested at an accredited lab, evidence in the compliance folder, one RCM at the end."</div></div>
+    <div class="pattern warn"><span class="p-icon">📚</span><div class="p-body"><b>Further reading:</b> <a href="https://en.wikipedia.org/wiki/Electromagnetic_interference">Electromagnetic interference (Wikipedia)</a> · <a href="https://industrial-ia.com/what-is-emc-testing-why-is-it-important/">What is EMC testing &amp; why it matters</a> · <a href="https://www.accessscience.com/content/article/a218800">AccessScience — Electromagnetic interference</a></div></div>
   </section>
 
   <!-- ============ PANEL: MY EXPERIENCE ============ -->
