@@ -340,6 +340,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <button class="tab" role="tab" aria-selected="false" data-tab="quiz"><span class="em">✅</span>Quiz</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="marks"><span class="em">🏷️</span>Real Marks</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="acro"><span class="em">🔤</span>Acronyms</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="iso"><span class="em">🧪</span>ISO Standards</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="cheat"><span class="em">📚</span>Cheat Sheet</button>
     </div>
   </div>
@@ -705,6 +706,78 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <div class="acro"><span class="term">OCP</span><div class="def">Open Compute Project — the open-source data-centre hardware standard behind "OCP racks" (Minkels).</div></div>
       <div class="acro"><span class="term">AS/NZS</span><div class="def">Australian/New Zealand Standard — the joint standards prefix (e.g. AS/NZS 4417.2, AS/NZS 60335.1).</div></div>
     </div>
+  </section>
+
+  <!-- ============ PANEL: ISO STANDARDS ============ -->
+  <section class="panel" role="tabpanel" id="panel-iso" hidden>
+    <h2>🧪 ISO standards — the family that runs the job</h2>
+    <p class="subhead">The job ad names ISO 9001 and ISO 17025 explicitly ("formal audit training", "ISO 17025 highly regarded"). This tab covers the star of the show — <b>ISO/IEC 17025</b> — then every other ISO/IEC standard that can come up in the interview.</p>
+
+    <h3 style="margin:18px 0 2px;font-size:17px">⭐ ISO/IEC 17025:2017 — the main standard for lab competence</h3>
+    <p class="subhead">The international standard that proves testing and calibration laboratories <b>operate competently and generate valid results</b>. When NATA accredits a lab, it accredits it to ISO/IEC 17025. In Australia the labs you commission — EMC Technologies, Austest, CHOICE, Comtest, CSIRO — all work under it.</p>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Why a Quality &amp; Product Compliance Manager lives on it</h3>
+        <ul style="margin:0;padding-left:18px">
+          <li style="font-size:13.5px;color:var(--ink-2);margin-bottom:6px"><b>Choosing labs:</b> only commission ISO&nbsp;17025-accredited labs (NATA in AU, IANZ in NZ) — Level 3 EESS evidence must come from one</li>
+          <li style="font-size:13.5px;color:var(--ink-2);margin-bottom:6px"><b>Judging reports:</b> an accredited report carries the NATA/ILAC endorsement and a signatory — the anatomy table below is your checklist</li>
+          <li style="font-size:13.5px;color:var(--ink-2);margin-bottom:6px"><b>Cross-border evidence:</b> ILAC MRA means a report from an accredited lab in another country is recognised here</li>
+          <li style="font-size:13.5px;color:var(--ink-2);margin-bottom:6px"><b>Defending evidence:</b> the compliance folder you hand a regulator is only as strong as the lab behind it</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>What the standard contains (2017 structure)</h3>
+        <ul style="margin:0;padding-left:18px">
+          <li style="font-size:13.5px;color:var(--ink-2);margin-bottom:6px"><b>Clause 4–5:</b> impartiality, confidentiality, structure</li>
+          <li style="font-size:13.5px;color:var(--ink-2);margin-bottom:6px"><b>Clause 6 — Resources:</b> personnel competence, facilities, equipment, metrological traceability, calibration</li>
+          <li style="font-size:13.5px;color:var(--ink-2);margin-bottom:6px"><b>Clause 7 — Process:</b> request review, sampling, technical records, <b>measurement uncertainty</b>, validity of results (QC &amp; proficiency testing), reporting</li>
+          <li style="font-size:13.5px;color:var(--ink-2);margin-bottom:6px"><b>Clause 8 — Management:</b> QMS option (ISO 9001-aligned) — why most labs are also ISO 9001 certified</li>
+        </ul>
+        <span class="code">NATA accreditation = ISO/IEC 17025 conformity</span>
+      </div>
+    </div>
+
+    <h3 style="margin:24px 0 0;font-size:15px">Anatomy of an accredited test report — your validity checklist</h3>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Section</th><th>What it must contain</th><th>Scheme twist</th></tr></thead>
+        <tbody>
+          <tr><td><b>Header</b></td><td>Lab logo + accreditation mark (NATA/ILAC), report number, issue date, page X of Y, client name, ABN</td><td>NATA endorsement = report is regulator-ready</td></tr>
+          <tr><td><b>Device</b></td><td>Model/type number, serial number, photos, ratings plate data, condition on receipt</td><td>Must match the exact model registered</td></tr>
+          <tr><td><b>Reference</b></td><td>Exact standard + edition/amendment, clause list tested, deviation notes</td><td>Current edition required; AU deviations noted</td></tr>
+          <tr><td><b>Test</b></td><td>Dates, environmental conditions, equipment list <b>with calibration certificates</b></td><td>Traceability chain — the whole point of 17025</td></tr>
+          <tr><td><b>Results</b></td><td>Clause-by-clause table: requirement → method → measured value → pass/fail</td><td>EESS L3 adds CoC cross-reference</td></tr>
+          <tr><td><b>Calculations</b></td><td>GEMS: AEC/star-rating calcs + <b>uncertainty budget</b></td><td>ActivFire adds witness statements</td></tr>
+          <tr><td><b>Sign-off</b></td><td>Authorised signatory (NATA-approved), accreditation endorsement</td><td>Without sign-off, the report is a draft</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin:24px 0 0;font-size:15px">All ISO/IEC standards applicable in this interview</h3>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Standard</th><th>What it is</th><th>Why it matters in this role</th></tr></thead>
+        <tbody>
+          <tr><td class="mono"><b>ISO 9001:2015</b></td><td>Quality management systems</td><td><b>The backbone of the job</b> — QMS, internal audits, NCR/CAPA, management review at Prestons</td></tr>
+          <tr><td class="mono"><b>ISO/IEC 17025:2017</b></td><td>Testing &amp; calibration lab competence</td><td>"Highly regarded" in the ad — choosing labs, judging reports, defending evidence to regulators</td></tr>
+          <tr><td class="mono"><b>ISO/IEC 17065:2012</b></td><td>Requirements for bodies certifying products</td><td>What JAS-ANZ certifiers (SAA, TÜV) are accredited to when they issue your Level 3 CoCs</td></tr>
+          <tr><td class="mono"><b>ISO 19011:2018</b></td><td>Guidelines for auditing management systems</td><td>The audit-training standard — the job ad asks for "formal audit training"</td></tr>
+          <tr><td class="mono"><b>ISO 31000:2018</b></td><td>Risk management — principles &amp; guidelines</td><td>Risk-based prioritisation across schemes; feeds the compliance risk register</td></tr>
+          <tr><td class="mono"><b>ISO 14001:2015</b></td><td>Environmental management systems</td><td>HAZCHEM controls, supplier environmental expectations, Legrand's CSR/sustainability goals</td></tr>
+          <tr><td class="mono"><b>ISO 45001:2018</b></td><td>Occupational health &amp; safety</td><td>Zero-harm culture, WHS registers — connects to HR's WHS focus</td></tr>
+          <tr><td class="mono"><b>ISO 55001:2014</b></td><td>Asset management systems</td><td>Plant/maintenance quality, MTTF, warranty data on assets (data-centre infrastructure)</td></tr>
+          <tr><td class="mono"><b>ISO 13485:2016</b></td><td>Medical devices QMS</td><td>Your medical background — pairs with 21 CFR when that story comes up</td></tr>
+          <tr><td class="mono"><b>ISO 14971:2019</b></td><td>Medical device risk management</td><td>Your semi-quantitative risk framework achievement</td></tr>
+          <tr><td class="mono"><b>IEC 60601</b></td><td>Medical electrical equipment safety</td><td>Listed in your expertise — cite only if the product conversation goes medical</td></tr>
+          <tr><td class="mono"><b>ISO 22000:2018</b></td><td>Food safety management systems</td><td>Nutrition/food-supply background — breadth evidence</td></tr>
+          <tr><td class="mono"><b>ISO 27001:2022</b></td><td>Information security management</td><td>Your digital QMS, AI tools and compliance databases live under it</td></tr>
+          <tr><td class="mono"><b>ISO 22301:2019</b></td><td>Business continuity management</td><td>Supply chain continuity — relevant to "raw material supply continuity" claims</td></tr>
+          <tr><td class="mono"><b>ISO/IEC 42001:2023</b></td><td>AI management systems</td><td>Newest kid — impressive to name when discussing your AI-in-QMS work</td></tr>
+          <tr><td class="mono"><b>ISO 17020:2012</b></td><td>Inspection body competence</td><td>Inspection schemes on your resume — cite if inspection verification comes up</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>Interview line that ties it together:</b> "ISO 9001 is the house we live in, ISO/IEC 17025 is the standard of the labs whose evidence we trust, and ISO 19011 is the discipline of how we audit both. The compliance folder is only as strong as the weakest certificate in it."</div></div>
   </section>
 
   <!-- ============ PANEL: CHEAT SHEET ============ -->
