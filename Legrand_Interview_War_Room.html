@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legrand Interview War Room</title>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #141b22;
+    --surface2: #1c2530;
+    --border: #2a3544;
+    --text: #c8d6e5;
+    --text2: #8899aa;
+    --accent: #4d9de0;
+    --accent2: #1F4E79;
+    --red: #e63946;
+    --orange: #f4a261;
+    --green: #2a9d8f;
+    --yellow: #e9c46a;
+    --header-bg: #141b22;
+    --shadow: rgba(0,0,0,0.3);
+    --heading: #ffffff;
+    --card-hover: rgba(77,157,224,0.08);
+  }
+  [data-theme="light"] {
+    --bg: #f4f6f9;
+    --surface: #ffffff;
+    --surface2: #eef1f5;
+    --border: #d1d9e0;
+    --text: #1a1f2e;
+    --text2: #5a6477;
+    --accent: #1F4E79;
+    --accent2: #16395a;
+    --red: #c92a2a;
+    --orange: #d97706;
+    --green: #0d7d6e;
+    --yellow: #b8860b;
+    --header-bg: #ffffff;
+    --shadow: rgba(0,0,0,0.08);
+    --heading: #111827;
+    --card-hover: rgba(31,78,121,0.04);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.5;
+    transition: background 0.3s, color 0.3s;
+  }
+  header {
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 8px var(--shadow);
+  }
+  header h1 { font-size: 1.2rem; font-weight: 700; color: var(--heading); letter-spacing: -0.3px; }
+  header h1 span { color: var(--accent); }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .badge-urgent { background: var(--red); color: #ffffff; }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav button {
+    background: transparent; border: 1px solid var(--border); color: var(--text2);
+    padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 0.82rem;
+    transition: all 0.15s; white-space: nowrap;
+  }
+  nav button:hover { border-color: var(--accent); color: var(--text); }
+  nav button.active { background: var(--accent2); border-color: var(--accent); color: #ffffff; }
+  main { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .panel-intro { color: var(--text2); font-size: 0.9rem; margin-bottom: 20px; max-width: 72ch; }
+  .panel-intro b { color: var(--text); }
+
+  /* FLASHCARD */
+  .flashcard-container { perspective: 1000px; max-width: 760px; margin: 0 auto; }
+  .flashcard {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 40px 36px; min-height: 380px; cursor: pointer;
+    transition: border-color 0.2s; display: flex; flex-direction: column;
+    justify-content: flex-start; align-items: center; text-align: center;
+    overflow-y: auto; max-height: 70vh;
+  }
+  .flashcard:hover { border-color: var(--accent); }
+  .interviewer-tag { font-size: 0.8rem; color: var(--accent); margin-bottom: 10px; font-weight: 600; }
+  .q-text { font-size: 1.18rem; color: var(--heading); line-height: 1.45; max-width: 58ch; }
+  .card-back { text-align: left; width: 100%; }
+  .card-back h3 { color: var(--accent); margin-bottom: 12px; font-size: 0.95rem; }
+  .card-back .answer-body { font-size: 0.95rem; color: var(--text); line-height: 1.65; white-space: pre-line; }
+  .card-back .why {
+    margin-top: 16px; padding: 12px 14px; background: var(--surface2); border-radius: 8px;
+    font-size: 0.85rem; color: var(--accent); border-left: 3px solid var(--accent);
+  }
+  .card-controls { display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+  .card-controls button {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+    padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: all 0.15s;
+  }
+  .card-controls button:hover { background: var(--accent2); border-color: var(--accent); }
+  .card-controls button.primary { background: var(--accent2); border-color: var(--accent); font-weight: 600; }
+  .card-counter { text-align: center; margin-top: 12px; color: var(--text2); font-size: 0.8rem; }
+  .filter-row { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+  .filter-chip {
+    padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; cursor: pointer;
+    border: 1px solid var(--border); background: transparent; color: var(--text2); transition: all 0.15s;
+  }
+  .filter-chip.active { background: var(--accent2); border-color: var(--accent); color: #ffffff; }
+  .filter-chip:hover { border-color: var(--accent); }
+
+  /* GRIDS */
+  .gap-grid, .interviewer-grid, .cheat-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px;
+  }
+  .gap-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+    transition: all 0.15s;
+  }
+  .gap-card:hover { border-color: var(--accent); }
+  .gap-card.critical { border-left: 4px solid var(--red); }
+  .gap-card.major { border-left: 4px solid var(--orange); }
+  .gap-card.moderate { border-left: 4px solid var(--yellow); }
+  .gap-card.strength { border-left: 4px solid var(--green); }
+  .gap-card h3 { font-size: 0.95rem; color: var(--heading); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .risk-tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 700; text-transform: uppercase; }
+  .risk-critical { background: rgba(230,57,70,0.2); color: var(--red); }
+  .risk-major { background: rgba(244,162,97,0.2); color: var(--orange); }
+  .risk-moderate { background: rgba(233,196,106,0.2); color: var(--yellow); }
+  .risk-strength { background: rgba(42,157,143,0.2); color: var(--green); }
+  .gap-card p { font-size: 0.85rem; color: var(--text2); line-height: 1.6; }
+  .gap-card .fix { margin-top: 10px; padding: 8px 12px; background: var(--surface2); border-radius: 6px; font-size: 0.8rem; color: var(--accent); }
+
+  /* INTERVIEWER CARDS */
+  .interviewer-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .interviewer-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .interviewer-card.expanded { border-color: var(--accent); }
+  .interviewer-card h3 { color: var(--heading); font-size: 1.1rem; }
+  .interviewer-card .role { color: var(--accent); font-size: 0.85rem; margin: 4px 0; }
+  .interviewer-card .stats { display: flex; gap: 16px; margin: 12px 0; flex-wrap: wrap; }
+  .interviewer-card .stat { text-align: center; }
+  .interviewer-card .stat-val { font-size: 1.1rem; font-weight: 700; color: var(--heading); }
+  .interviewer-card .stat-label { font-size: 0.7rem; color: var(--text2); }
+  .interviewer-card .detail { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .interviewer-card.expanded .detail { display: block; }
+  .interviewer-card .detail h4 { color: var(--accent); font-size: 0.85rem; margin: 12px 0 6px; }
+  .interviewer-card .detail ul { list-style: none; }
+  .interviewer-card .detail ul li { font-size: 0.82rem; color: var(--text2); padding: 3px 0; }
+  .interviewer-card .detail ul li::before { content: "• "; color: var(--accent); }
+  .interviewer-card .detail .ask { color: var(--green); }
+  .interviewer-card .detail .ask li::before { content: "❓ "; color: var(--green); }
+
+  /* PRACTICE MODE */
+  .practice-area { max-width: 700px; margin: 0 auto; text-align: center; }
+  .practice-timer {
+    font-size: 2.6rem; font-weight: 700; color: var(--accent);
+    font-variant-numeric: tabular-nums; margin: 20px 0;
+  }
+  .practice-question {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 36px 28px; margin: 20px 0; font-size: 1.1rem; color: var(--heading); line-height: 1.5;
+  }
+  .practice-question .q-meta { font-size: 0.8rem; color: var(--accent); margin-bottom: 12px; }
+  .practice-answer {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; text-align: left; font-size: 0.92rem; color: var(--text); line-height: 1.65;
+    margin: 16px 0; white-space: pre-line; display: none;
+  }
+  .practice-answer.visible { display: block; }
+
+  /* CHEAT SHEET */
+  .cheat-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  .cheat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .cheat-box h3 { color: var(--heading); font-size: 0.9rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .cheat-box h3 .icon { font-size: 1.2rem; }
+  .cheat-box ul { list-style: none; }
+  .cheat-box ul li { font-size: 0.82rem; color: var(--text2); padding: 3px 0; }
+  .cheat-box ul li strong { color: var(--text); }
+  .dont-say { color: var(--red) !important; }
+  .do-say { color: var(--green) !important; }
+
+  .themeToggle { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: all 0.15s; }
+  .themeToggle:hover { border-color: var(--accent); }
+
+  @media (max-width: 600px) {
+    header { padding: 12px; }
+    header h1 { font-size: 1rem; }
+    nav button { padding: 6px 10px; font-size: 0.72rem; }
+    main { padding: 12px; }
+    .flashcard { padding: 24px 18px; min-height: 300px; }
+    .gap-grid, .interviewer-grid, .cheat-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔌 Legrand <span>QA &amp; Product Compliance</span> — Interview War Room</h1>
+  <span class="badge badge-urgent">Prestons NSW · Reports to R&amp;D Director</span>
+  <nav id="mainNav">
+    <button class="active" data-panel="flashcards">🎴 Flashcards</button>
+    <button data-panel="company">🏢 Company Intel</button>
+    <button data-panel="interviewers">👥 Interviewers</button>
+    <button data-panel="practice">🎯 Practice Mode</button>
+    <button data-panel="askthem">❓ Questions to Ask</button>
+  </nav>
+  <button class="themeToggle" id="themeToggle" title="Toggle dark/light mode">🌙</button>
+</header>
+
+<main>
+
+<!-- ==================== FLASHCARDS ==================== -->
+<div id="flashcards" class="panel active">
+  <p class="panel-intro">15 questions with model answers, built from <b>your</b> resume numbers — nothing unsubstantiated. Click the card to flip; filter by interviewer.</p>
+  <div class="filter-row" id="flashcardFilters">
+    <button class="filter-chip active" data-filter="all">All (15)</button>
+    <button class="filter-chip" data-filter="Paul">👤 Paul — technical (7)</button>
+    <button class="filter-chip" data-filter="Erika">👤 Erika — behavioural (8)</button>
+  </div>
+  <div class="flashcard-container">
+    <div class="flashcard" id="flashcard">
+      <div class="card-front" id="cardFront"></div>
+      <div class="card-back" id="cardBack" style="display:none"></div>
+    </div>
+  </div>
+  <div class="card-controls">
+    <button id="prevBtn">◀ Previous</button>
+    <button class="primary" id="flipBtn">🔄 Flip Card</button>
+    <button id="nextBtn">Next ▶</button>
+    <button id="randBtn">🎲 Random</button>
+  </div>
+  <div class="card-counter" id="cardCounter">Card 1 / 15</div>
+</div>
+
+<!-- ==================== COMPANY INTEL ==================== -->
+<div id="company" class="panel">
+  <p class="panel-intro">The client is <b>Legrand Australia</b> — the job posting's "global leader in electrical &amp; digital building infrastructure products". Commit these to memory; drop 2–3 naturally in conversation.</p>
+  <div class="gap-grid">
+    <div class="gap-card strength"><h3>🏭 Prestons = HQ + manufacturing + R&amp;D</h3><p>Opened Aug 2012 as the HPM Legrand "super site": 23,000 m² incl. 7,000 m² manufacturing, central warehousing, showroom, ~300 staff. This is where the role sits.</p></div>
+    <div class="gap-card strength"><h3>🇦🇺 40% of revenue locally manufactured</h3><p>Dedicated local R&amp;D team designs products for the AU market — residential, commercial, hospitals, hotels, data centres. Local manufacturing is a strategic identity, not a cost.</p></div>
+    <div class="gap-card strength"><h3>📈 Data centres = fastest-growing segment</h3><p>~15% of group sales, double-digit growth in Australia. Keor FLEX UPS is a current launch; DX³ RCBO expansion news shows AU electrical infrastructure shift.</p></div>
+    <div class="gap-card major"><h3>🤝 VASS acquisition (2024)</h3><p>Australian busway power distribution leader (Ingleburn, ~35 staff), strong data-centre focus. Fresh acquisition = compliance integration work for this role.</p></div>
+    <div class="gap-card strength"><h3>🖥️ CRS — Computer Room Solutions</h3><p>Part of the Legrand Group; custom-designed data-centre &amp; ICT solutions, based at Prestons (Mascot office too).</p></div>
+    <div class="gap-card moderate"><h3>🏷️ AU brands</h3><p>Legrand, HPM, Bticino, Starline, Raritan, VASS. Data-centre specialist brands: Borri (UPS), Cablofil, Minkels, Server Technology, Usystems (cooling), Zucchini (busbar), Modulan.</p></div>
+    <div class="gap-card moderate"><h3>⚡ Grey space vs white space</h3><p>Grey = power (transformers, switchgear, busway, UPS, cable pathways). White = IT (racks, containment, cooling, rack PDUs, structured cabling). Use the terms — it's their internal language.</p></div>
+    <div class="gap-card strength"><h3>🌱 Values &amp; CSR</h3><p>Net Zero carbon by 2050 (SBTi-validated), 2025–2027 CSR roadmap, circular economy, Elle Legrand DEI network. Hashtags: #LegrandImprovingLives #WeAreDependable #WeEmbraceInclusion #WeMoveInSync.</p></div>
+    <div class="gap-card moderate"><h3>🚨 Emergency lighting = ActivFire play</h3><p>Galaxy/Axiom emergency luminaires &amp; exit signs — the product range that makes ActivFire relevant at Legrand (AS 2293.3).</p></div>
+    <div class="gap-card moderate"><h3>👤 People to know</h3><p>ANZ CEO: Palash Nandy. Your chain: role reports to the R&amp;D Director (Paul Barron), leading a small technical team. ISO 9001 certification referenced on legrand.com.au.</p></div>
+  </div>
+</div>
+
+<!-- ==================== INTERVIEWERS ==================== -->
+<div id="interviewers" class="panel">
+  <p class="panel-intro">Click a card to expand. One strategy each — mirror their language.</p>
+  <div class="interviewer-grid">
+    <div class="interviewer-card" id="cardPaul">
+      <h3>Paul Barron</h3>
+      <div class="role">R&amp;D Director, Legrand Australia — likely hiring manager (role reports to him)</div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">18+</div><div class="stat-label">yrs engineering</div></div>
+        <div class="stat"><div class="stat-val">2007–19</div><div class="stat-label">R&amp;D Mgr, HPM Legrand</div></div>
+        <div class="stat"><div class="stat-val">UNSW</div><div class="stat-label">BEng Electrical</div></div>
+        <div class="stat"><div class="stat-val">UTS</div><div class="stat-label">MEng Bus. Studies</div></div>
+      </div>
+      <div class="detail">
+        <h4>His own words (mirror these)</h4>
+        <ul>
+          <li>"innovation and leadership in electrical and electronics engineering"</li>
+          <li>"cutting-edge sustainable technology"</li>
+          <li>"managing complex projects and fostering a culture of continuous improvement"</li>
+          <li>"smart and sustainable infrastructures"</li>
+        </ul>
+        <h4>What he likely cares about</h4>
+        <ul>
+          <li>R&amp;D–quality interface: compliance designed IN, not bolted on</li>
+          <li>NCR turnaround speed and root-cause rigour on a manufacturing + R&amp;D site</li>
+          <li>New-product certification before launch: EESS/RCM, GEMS/MEPS, ActivFire</li>
+          <li>Supplier Declarations of Conformity for imported brands (Starline, Raritan…)</li>
+          <li>Warranty / field-failure analysis feeding back into design</li>
+          <li>VASS integration + data-centre compliance onboarding</li>
+        </ul>
+        <h4>Questions to ask him</h4>
+        <ul class="ask">
+          <li>How is quality currently positioned between R&amp;D and manufacturing at Prestons — where's the biggest gap this role closes?</li>
+          <li>With VASS and the data-centre portfolio growing, what does compliance onboarding for new products look like today?</li>
+          <li>What does good look like for NCR turnaround — field failure to corrective action?</li>
+          <li>What are the top priorities for this role in the first six months?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="interviewer-card" id="cardErika">
+      <h3>Erika Faumui</h3>
+      <div class="role">HR Business Partner, Legrand Australia (since May 2022)</div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">4+ yrs</div><div class="stat-label">HR BP at Legrand</div></div>
+        <div class="stat"><div class="stat-val">17 yrs</div><div class="stat-label">legal EA, Ashurst</div></div>
+        <div class="stat"><div class="stat-val">Elle</div><div class="stat-label">Legrand APAC ambassador</div></div>
+      </div>
+      <div class="detail">
+        <h4>Her own words (mirror these)</h4>
+        <ul>
+          <li>"partnering with stakeholders at all levels"</li>
+          <li>"balancing business objectives with employee needs"</li>
+          <li>"employee engagement, organisational effectiveness, workplace culture"</li>
+          <li>"continuous improvement across HR systems and processes"</li>
+        </ul>
+        <h4>What she likely cares about</h4>
+        <ul>
+          <li>Values fit: #LegrandImprovingLives #WeEmbraceInclusion #WeAreDependable</li>
+          <li>Relationships across levels — quality touches R&amp;D, production, suppliers, regulators</li>
+          <li>WHS mindset — she owns WHS initiatives and hires WHS roles at CRS</li>
+          <li>Motivation &amp; retention: why Legrand, team fit, growth plan</li>
+        </ul>
+        <h4>Questions to ask her</h4>
+        <ul class="ask">
+          <li>What makes people stay at the Prestons site?</li>
+          <li>What does success look like in the first 90 days, from your perspective?</li>
+          <li>How do R&amp;D and manufacturing collaborate day to day?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PRACTICE MODE ==================== -->
+<div id="practice" class="panel">
+  <div class="practice-area">
+    <p class="panel-intro">Simulate the room: 2-minute timer, speak OUT LOUD, then reveal the model answer and compare.</p>
+    <div class="practice-timer" id="practiceTimer">2:00</div>
+    <div class="card-controls">
+      <button id="timerToggle">▶ Start</button>
+      <button id="timerReset">↺ Reset</button>
+      <button class="primary" id="practiceNew">🎲 New question</button>
+      <button id="practiceReveal">👁 Reveal answer</button>
+    </div>
+    <div class="practice-question" id="practiceQuestion">
+      <div class="q-meta" id="practiceMeta">—</div>
+      <div id="practiceQText">Click "New question" to begin.</div>
+    </div>
+    <div class="practice-answer" id="practiceAnswer"></div>
+  </div>
+</div>
+
+<!-- ==================== QUESTIONS TO ASK ==================== -->
+<div id="askthem" class="panel">
+  <p class="panel-intro">Asking sharp questions signals seniority. Pick 3 for Paul, 2 for Erika.</p>
+  <div class="cheat-grid">
+    <div class="cheat-box">
+      <h3><span class="icon">👤</span> For Paul (pick 3)</h3>
+      <ul>
+        <li><strong>1.</strong> How is quality currently positioned between R&amp;D and manufacturing at Prestons, and where's the biggest gap this role would close?</li>
+        <li><strong>2.</strong> With VASS coming in and the data-centre portfolio growing, what does compliance onboarding for new products look like today?</li>
+        <li><strong>3.</strong> What does good look like for NCR turnaround here — from field failure to corrective action?</li>
+        <li><strong>4.</strong> You've mentioned sustainable technology as a priority — how does that show up in product compliance and design decisions?</li>
+        <li><strong>5.</strong> What would the first six months' priorities be for this role?</li>
+      </ul>
+    </div>
+    <div class="cheat-box">
+      <h3><span class="icon">👤</span> For Erika (pick 2)</h3>
+      <ul>
+        <li><strong>1.</strong> How would you describe the culture at the Prestons site — what makes people stay?</li>
+        <li><strong>2.</strong> What does success look like in the first 90 days for someone in this role, from your perspective?</li>
+        <li><strong>3.</strong> How do the R&amp;D and manufacturing teams collaborate day to day?</li>
+        <li><strong>4.</strong> What learning and development support is available for the quality team?</li>
+      </ul>
+    </div>
+    <div class="cheat-box">
+      <h3><span class="icon">⚡</span> Don't ask / Do ask</h3>
+      <ul>
+        <li class="dont-say">Don't ask about salary, perks or remote days in round one — the recruiter handles those.</li>
+        <li class="dont-say">Don't ask questions answerable from the website (e.g. "what brands do you have").</li>
+        <li class="do-say">Do ask about the team you'd lead — "small technical team" is in the ad.</li>
+        <li class="do-say">Do ask what keeps the R&amp;D Director up at night on compliance.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(s){ return document.querySelector(s); };
+
+  /* ---------- nav ---------- */
+  var navBtns = document.querySelectorAll("#mainNav button");
+  var panels = document.querySelectorAll(".panel");
+  navBtns.forEach(function(b){
+    b.addEventListener("click", function(){
+      navBtns.forEach(function(x){ x.classList.remove("active"); });
+      b.classList.add("active");
+      panels.forEach(function(p){ p.classList.remove("active"); });
+      document.getElementById(b.getAttribute("data-panel")).classList.add("active");
+    });
+  });
+
+  /* ---------- theme ---------- */
+  var themeBtn = $("#themeToggle");
+  function applyTheme(){
+    var light = document.documentElement.getAttribute("data-theme") === "light";
+    themeBtn.textContent = light ? "☀️" : "🌙";
+  }
+  themeBtn.addEventListener("click", function(){
+    var light = document.documentElement.getAttribute("data-theme") === "light";
+    if(light){ document.documentElement.removeAttribute("data-theme"); try{localStorage.removeItem("war-room-theme");}catch(e){} }
+    else { document.documentElement.setAttribute("data-theme","light"); try{localStorage.setItem("war-room-theme","light");}catch(e){} }
+    applyTheme();
+  });
+  try{ if(localStorage.getItem("war-room-theme")==="light"){ document.documentElement.setAttribute("data-theme","light"); } }catch(e){}
+  applyTheme();
+
+  /* ---------- flashcards ---------- */
+  var CARDS = [
+    { who:"Paul", type:"Technical",
+      q:"Walk me through how you would set up a compliance process for a brand-new product we're about to launch at Prestons.",
+      a:"I'd start at the design stage, not at launch. First, determine the product's regulatory pathway: for electrical equipment I'd classify it against the EESS in-scope equipment definitions and risk levels — Level 1, 2 or 3 — and establish the RCM registration requirements. For energy-using products I'd check GEMS/MEPS scope, and for emergency lighting or fire-safety products, ActivFire certification under the AF-D001 rules. Then I'd run a compliance gate in the design review: test reports, supplier declarations of conformity, labelling approvals — all locked in before commercial release. I've done exactly this before: I established a unified product testing and validation protocol covering EESS, GEMS/MEPS and ActivFire that achieved 100% compliance verification prior to release. After launch, the QMS tracks field performance — warranty claims and failures feed straight back into CAPA, so the loop to R&D stays closed.",
+      why:"Names Legrand's actual obligations, shows a system (not one-off heroics), and lands a real achievement." },
+    { who:"Paul", type:"Technical",
+      q:"Legrand manufactures locally but also imports specialist brands like Starline, Raritan and Minkels. How do you manage supplier quality across that mix?",
+      a:"I treat suppliers on a risk-tiered basis. For locally made product, the levers are supplier audits, incoming inspection and traceability through the QMS — I've run third-party audits to ISO 9001, 14001 and 45001 and held contract manufacturers to quality standards through scheduled audits and oversight. For imported brands, the critical control is the Supplier Declaration of Conformity: every product needs verified test evidence before it carries the RCM. I built a supplier performance dashboard with Power BI and Tableau that tracked real-time KPIs and delivered a 25% improvement in supplier compliance — that same tool feeds commercial negotiations, so quality data drives business decisions, not just audits.",
+      why:"Answers the exact hybrid manufacturing/import problem Legrand has, with a measurable result." },
+    { who:"Paul", type:"Technical",
+      q:"Tell me about a time you closed the loop from a field failure to a design change.",
+      a:"At a medical device manufacturer, we were seeing defects on a product line running at about 7%. I led a company-wide program using SPC and DOE — control charts on the production data, designed experiments to isolate the variables — and drove root cause with the engineering team rather than blaming the line. The corrective actions included process changes that went back into the design documentation, not just retraining. Defect rates dropped from 7% to under 1% in six months, and customer satisfaction rose 25%. That's my standard pattern: NCR logged, 5 Whys and Fishbone at the line, CAPA with owners and due dates, and the outcome fed back into design review so it never recurs.",
+      why:"Paul is R&D — the \"fed back into design\" line is what he's listening for." },
+    { who:"Paul", type:"Technical",
+      q:"How would you approach integrating VASS — the busway business we acquired — into our quality system?",
+      a:"I'd start with a structured gap analysis: map VASS's existing processes against ISO 9001 and Legrand's QMS, then decide what to align, adopt or keep. I've done this scale of integration — I migrated 200+ legacy procedures into a business management system and improved document findability by 40%. Then supplier qualification, incoming inspection standards, and certification alignment — their product registrations under EESS need to be checked and, where needed, re-lodged under the Legrand entity. Finally, people: I'd train their team on the combined QMS rather than imposing it, because a QMS lives or dies on the floor. I've coached 50+ staff on Lean tools and embedded CI cultures from the ground up.",
+      why:"VASS is Legrand's freshest integration pain point; you're showing you've done acquisition-quality work before." },
+    { who:"Paul", type:"Technical",
+      q:"You mention AI and automation a lot. Where does it genuinely help compliance, and where is it hype?",
+      a:"Honest answer: automation is transformational for the boring parts — audit scheduling, checklists, document control, reminders, tracking CAPA due dates. I built an ISO 9001 audit automation prototype with UiPath and Power Automate that delivered 60% faster compliance readiness. AI helps with knowledge: a QMS assistant for on-demand compliance guidance cut document search time by 60% and resolved 30% more queries. But root cause analysis, risk decisions, signing off a non-conformance — that stays with people. AI supports the auditor's judgment; it doesn't replace it. In my view the win is freeing quality people from administration so they spend time on the floor.",
+      why:"Paul reads resumes claiming AI everywhere; a boundaried answer builds trust. This protects you from the \"gimmick\" follow-up." },
+    { who:"Paul", type:"Technical",
+      q:"What's your direct experience with EESS, GEMS/MEPS and ActivFire?",
+      a:"I've built the compliance workflow around all three. EESS: risk classification of equipment, RCM registration, supplier declarations and test reports — I keep the current in-scope equipment definitions and risk levels as my reference. GEMS/MEPS: energy performance registration and labelling for energy-using products. ActivFire: fire protection requirements for equipment like emergency lighting and exit signs, under the CSIRO ActivFire scheme's rules. In a previous engagement I established and executed a unified testing and validation protocol covering all three frameworks that achieved 100% compliance verification — test reports, database registrations, labelling approvals — before commercial release. What appeals to me about Legrand is that all three apply in one building: your emergency lighting range activates ActivFire, your power products activate EESS, and the data-centre range brings both plus energy efficiency.",
+      why:"The last sentence proves you've researched THEIR catalogue, not just the regulations." },
+    { who:"Paul", type:"Technical",
+      q:"How do you balance compliance rigour with speed to market, given how fast our data-centre business is growing?",
+      a:"Through risk-based prioritisation and early involvement. The biggest speed killer is discovering a compliance blocker at launch — so I put the compliance gate at the front of the design review, not the end. Standardised templates for test reports, SDOCs and registrations mean the 10th product launches faster than the 1st. I parallelise where the regulators allow: registration activities run while validation completes. And I've measured the benefit — I re-engineered production workflows with automated approval gates and achieved a 20% cycle time improvement while keeping ISO 9001 alignment. Compliance done early is a speed advantage, not a tax.",
+      why:"Frames compliance as an enabler of growth — the exact tension of his data-centre roadmap." },
+    { who:"Erika", type:"Behavioural",
+      q:"Why Legrand, and why this role?",
+      a:"Three reasons. First, the business: Legrand's purpose of improving lives shows up concretely — Net Zero by 2050, the circular economy roadmap, local manufacturing. Second, the role itself: it sits exactly at the intersection of what I've spent my career doing — ISO 9001 quality systems, product compliance, WHS, and supplier quality — in a company that both manufactures locally and is growing fast in data centres. Third, the culture: I've followed Legrand's Elle Legrand work and the WeEmbraceInclusion and WeAreDependable values; I build quality systems through coaching and cross-functional relationships, and that kind of culture is where my approach works best.",
+      why:"Proves research (Net Zero, Elle Legrand, values hashtags), maps skills to the role, and gives culture a place." },
+    { who:"Erika", type:"Behavioural",
+      q:"Tell me about a time you influenced people across different functions without direct authority.",
+      a:"Quality is the classic no-authority function — I work with production, R&D, suppliers, regulators and executives, none of whom report to me. A good example: standardising process documentation across two regional centres. I consolidated 150+ procedure manuals into one streamlined business management system. The resistance was real — people were attached to 'their' manuals. So I ran workshops, let each team re-map their own processes with facilitation from me, and showed them the before-and-after on search time. Result: findability up 50%, onboarding training time down 20%, and — most importantly — the teams owned the new system. My influence style is coaching and data, not directives.",
+      why:"Erika's profile literally says she values \"partnering with stakeholders at all levels\" — this mirrors it." },
+    { who:"Erika", type:"Behavioural",
+      q:"How do you handle pushback from production when you raise a non-conformance?",
+      a:"I treat the NCR as a shared problem, not an accusation. I go to the line with data — SPC charts, the actual scrap or defect numbers — and I run root cause WITH the operators, not at them. 5 Whys and Fishbone work best when the people doing the work lead them. I also make the business case visible: one Kaizen event on non-conformances in metal fabrication eliminated 22% scrap, worth $750K a year — that changes the conversation from 'quality police' to 'we're saving our own bonuses'. Over time that builds a zero-harm culture where people raise issues before they become NCRs.",
+      why:"Shows emotional intelligence + hard numbers." },
+    { who:"Erika", type:"Behavioural",
+      q:"What does a zero-accident culture mean to you, and what have you actually done about WHS?",
+      a:"Zero harm means people feel responsible for each other's safety, not just compliant with a register. Practically, I've done it in layers: I'm trained in WHS and HAZCHEM control, I've implemented safety registers — hazards, incidents, safety reviews — aligned to ISO 45001, and I've achieved a Zero Harm culture across metro and regional sites. I also modernised incident reporting: a real-time Power BI dashboard for NSW utility centres that cut investigation time from 72 hours to under 24 — because the faster you learn from an incident, the faster you prevent the next one. Safety and quality use the same engine: visibility, root cause, and closing the loop.",
+      why:"Erika owns WHS initiatives and is hiring WHS roles at CRS — this is her language." },
+    { who:"Erika", type:"Behavioural",
+      q:"Describe a change you led that people resisted, and how you brought them along.",
+      a:"I led a full digital migration of a legacy QMS to a cloud-based ISO 9001 solution. The team had lived in the old system for years and saw it as disruption. I applied a structured change approach — ADKAR — mapped every process with the owners before migrating anything, ran awareness sessions on what each person would gain (shorter approvals, no lost documents), and implemented feedback loops during rollout. Approval cycles dropped 60%, and document accessibility improved across every department. The proof it stuck: the teams that resisted hardest became the ones proposing the next improvements.",
+      why:"Named methodology + people outcome. Erika runs L&D and change support — she'll recognise ADKAR." },
+    { who:"Erika", type:"Behavioural",
+      q:"Where do you see yourself in three to five years?",
+      a:"I want to grow from owning quality and compliance into shaping broader operational excellence — a head-of-quality or continuous-improvement leadership role, ideally within a manufacturing business like Legrand where I can stay close to the floor. I'm working towards the ASQ Certified Manager of Organisational Excellence, and I keep investing in business education. In the short term, my whole focus is this role: building the compliance backbone that lets the data-centre growth keep accelerating safely.",
+      why:"Ambitious but anchored, shows commitment to professional development, and doesn't scare them off." },
+    { who:"Erika", type:"Behavioural",
+      q:"What would your referees say is your biggest weakness?",
+      a:"They'd probably say I care too much about documentation quality — I've been known to rework a SOP that was 'good enough' because I know it's the document that gets audited in two years. I've learned to balance that: standards and templates mean rigour without reinventing the wheel every time. The other honest one: I can move fast on improvement ideas and need to bring everyone at the same pace — which is why I lean on structured change management.",
+      why:"Weaknesses that are actually strengths for a compliance role, delivered with self-awareness." },
+    { who:"Erika", type:"Behavioural",
+      q:"Tell me about a time a project failed, and what you did.",
+      a:"Early in my career I deployed a new SOP set across a site without enough involvement from the operators who'd use them. Adoption was poor and audit findings went up instead of down. The lesson shaped my whole approach: I re-ran the rollout as workshops with the operators co-authoring the procedures — adoption flipped, and the audits went clean. Since then, every system I've implemented — QMS migrations, dashboards, Kaizen programs — has been built with the people who use it, which is why my results tend to stick.",
+      why:"Erika recruits for culture; this answer shows humility, learning and no blame-shifting." }
+  ];
+
+  var filtered = CARDS.slice();
+  var ci = 0, flipped = false;
+  var card = $("#flashcard"), front = $("#cardFront"), back = $("#cardBack");
+  var counter = $("#cardCounter"), flipBtn = $("#flipBtn");
+
+  function setFilter(f){
+    filtered = f === "all" ? CARDS.slice() : CARDS.filter(function(c){ return c.who === f; });
+    ci = 0; renderCard();
+  }
+  function renderCard(){
+    if(filtered.length === 0) return;
+    var c = filtered[ci];
+    front.innerHTML = '<div class="interviewer-tag">👤 ' + c.who + " · " + c.type + "</div><div class=\"q-text\">" + c.q + "</div>";
+    back.innerHTML = "<h3>Model answer — speak it in ~90 seconds</h3><div class=\"answer-body\">" + c.a + "</div><div class=\"why\">💡 Why this works: " + c.why + "</div>";
+    flipped = false; back.style.display = "none"; front.style.display = "block";
+    counter.textContent = "Card " + (ci + 1) + " / " + filtered.length;
+  }
+  function flip(){
+    if(filtered.length === 0) return;
+    flipped = !flipped;
+    front.style.display = flipped ? "none" : "block";
+    back.style.display = flipped ? "block" : "none";
+  }
+  card.addEventListener("click", flip);
+  flipBtn.addEventListener("click", flip);
+  $("#nextBtn").addEventListener("click", function(){ if(filtered.length){ ci = (ci + 1) % filtered.length; renderCard(); } });
+  $("#prevBtn").addEventListener("click", function(){ if(filtered.length){ ci = (ci - 1 + filtered.length) % filtered.length; renderCard(); } });
+  $("#randBtn").addEventListener("click", function(){ if(filtered.length){ ci = Math.floor(Math.random() * filtered.length); renderCard(); } });
+  document.querySelectorAll("#flashcardFilters .filter-chip").forEach(function(chip){
+    chip.addEventListener("click", function(){
+      document.querySelectorAll("#flashcardFilters .filter-chip").forEach(function(x){ x.classList.remove("active"); });
+      chip.classList.add("active");
+      setFilter(chip.getAttribute("data-filter"));
+    });
+  });
+  renderCard();
+
+  /* ---------- interviewer expand ---------- */
+  ["cardPaul","cardErika"].forEach(function(id){
+    document.getElementById(id).addEventListener("click", function(){ this.classList.toggle("expanded"); });
+  });
+
+  /* ---------- practice mode ---------- */
+  var timerEl = $("#practiceTimer"), timerToggle = $("#timerToggle"), timerReset = $("#timerReset");
+  var seconds = 120, timerId = null;
+  function drawTimer(){
+    var m = Math.floor(seconds / 60), s = seconds % 60;
+    timerEl.textContent = m + ":" + (s < 10 ? "0" : "") + s;
+  }
+  timerToggle.addEventListener("click", function(){
+    if(timerId){ clearInterval(timerId); timerId = null; timerToggle.textContent = "▶ Resume"; }
+    else { timerId = setInterval(function(){
+      if(seconds > 0){ seconds--; drawTimer(); }
+      if(seconds === 0){ clearInterval(timerId); timerId = null; timerToggle.textContent = "▶ Start"; timerEl.style.color = "var(--red)"; }
+    }, 1000); timerToggle.textContent = "⏸ Pause"; }
+  });
+  timerReset.addEventListener("click", function(){
+    clearInterval(timerId); timerId = null; seconds = 120; timerToggle.textContent = "▶ Start";
+    timerEl.style.color = "var(--accent)"; drawTimer();
+  });
+  $("#practiceNew").addEventListener("click", function(){
+    var c = CARDS[Math.floor(Math.random() * CARDS.length)];
+    $("#practiceMeta").textContent = "👤 " + c.who + " · " + c.type + " · 2-minute answer";
+    $("#practiceQText").textContent = c.q;
+    $("#practiceAnswer").classList.remove("visible");
+    $("#practiceAnswer").textContent = "Model answer:\n\n" + c.a + "\n\n💡 Why this works: " + c.why;
+    seconds = 120; drawTimer(); timerEl.style.color = "var(--accent)";
+  });
+  $("#practiceReveal").addEventListener("click", function(){
+    var a = $("#practiceAnswer");
+    if(a.textContent) a.classList.toggle("visible");
+  });
+  drawTimer();
+})();
+</script>
+</body>
+</html>
