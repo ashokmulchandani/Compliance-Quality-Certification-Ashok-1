@@ -342,6 +342,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <button class="tab" role="tab" aria-selected="false" data-tab="acro"><span class="em">🔤</span>Acronyms</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="iso"><span class="em">🧪</span>ISO Standards</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="teststd"><span class="em">🔬</span>Test Standards</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="exp"><span class="em">💼</span>My Experience</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="cheat"><span class="em">📚</span>Cheat Sheet</button>
     </div>
   </div>
@@ -860,6 +861,92 @@ td.mono{font-family:var(--font-m);font-size:12px}
       </table>
     </div>
     <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>Interview line:</b> "One product, two questions — which <b>Part 2</b> of the safety standard applies, and what's the <b>EMC</b> pathway. A fan is 60335.1 + 60335.2.80; a PDU is 62368.1 + CISPR 32. Classify first, then test."</div></div>
+  </section>
+
+  <!-- ============ PANEL: MY EXPERIENCE ============ -->
+  <section class="panel" role="tabpanel" id="panel-exp" hidden>
+    <h2>💼 My experience — where the three schemes showed up in my past work</h2>
+    <p class="subhead">The same three frameworks followed me across rail infrastructure, manufacturing and connected devices. Each employer below maps to EESS, GEMS/MEPS and ActivFire — the through-line is always: scope check → standard selection → evidence chain → register/mark → ongoing control.</p>
+
+    <h3 style="margin:22px 0 2px;font-size:17px">🚆 Sydney Trains — rail network &amp; stations (NSW government)</h3>
+    <div class="grid g3">
+      <div class="card lv l3"><span class="lv-n" style="color:var(--eess)">⚡ EESS &amp; NSW electrical</span><h3>Declared articles + in-service safety</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Safety switches, tools &amp; portable equipment — NSW's <b>declared-article system</b> (the REAS / CoA dual-track I now know inside out)</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Portable appliance in-service testing to <span class="mono">AS/NZS 3760</span> (test &amp; tag) across depots</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Emergency &amp; evacuation lighting — <span class="mono">AS/NZS 60598.2.22</span> luminaires + <span class="mono">AS 2293.3</span></li>
+        </ul>
+      </div>
+      <div class="card lv l2"><span class="lv-n" style="color:var(--gems)">🔌 GEMS/MEPS</span><h3>Energy in infrastructure</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">LED lighting retrofits at stations — the <b>LED Lamps Determination 2025</b> world (MEPS from 3 Mar 2026)</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">HVAC &amp; lighting energy performance in station upgrades</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Motors &amp; pumps — regulated GEMS classes even in public infrastructure</li>
+        </ul>
+      </div>
+      <div class="card lv l1"><span class="lv-n" style="color:var(--fire)">🔥 ActivFire</span><h3>Fire safety on the network</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Fire detection &amp; alarm systems in stations/depots — <span class="mono">AS 1670</span> / <span class="mono">AS 7240</span> FDCIE</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Portable extinguishers to <span class="mono">AS/NZS 1841</span> — service &amp; replacement cycles</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Emergency exit signage &amp; evacuation compliance</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin:26px 0 2px;font-size:17px">🏭 Stramit — steel building products manufacturer</h3>
+    <div class="grid g3">
+      <div class="card lv l3"><span class="lv-n" style="color:var(--eess)">⚡ EESS &amp; NSW electrical</span><h3>Plant electrical safety</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">RCDs / safety switches on the floor — <b>NSW declared articles</b>, the same class as DX³ RCBOs</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Distribution boards &amp; protection for roll-formers and presses</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">In-service testing of plant &amp; tools (<span class="mono">AS/NZS 3760</span>) inside the Zero Harm culture</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Fixed installation world — <span class="mono">AS/NZS 3000</span> Wiring Rules</li>
+        </ul>
+      </div>
+      <div class="card lv l2"><span class="lv-n" style="color:var(--gems)">🔌 GEMS/MEPS</span><h3>Motor efficiency</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><b>Three-phase electric motors</b> in production lines — a regulated GEMS class (efficiency to <span class="mono">IEC 60034-2-1</span>)</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Compressors &amp; transformers in plant utilities</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Energy-efficiency angle on my OPE/OEE and Kaizen programs</li>
+        </ul>
+      </div>
+      <div class="card lv l1"><span class="lv-n" style="color:var(--fire)">🔥 ActivFire</span><h3>Factory fire suppression</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Sprinkler systems to <span class="mono">AS 2118</span> across the plant</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Extinguishers &amp; hydrants — location, service &amp; compliance registers</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Emergency lighting on the factory floor — part of the safety-register discipline</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin:26px 0 2px;font-size:17px">📡 IoT &amp; connected devices</h3>
+    <div class="grid g3">
+      <div class="card lv l3"><span class="lv-n" style="color:var(--eess)">⚡ EESS &amp; EMC</span><h3>The connected-product stack</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Smart plugs &amp; switches — wiring devices to <span class="mono">AS/NZS 3112</span>/<span class="mono">60335</span></li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Power supplies &amp; chargers — <span class="mono">AS/NZS 61558.1</span> / <span class="mono">60335.2.29</span> (Level 3 territory)</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Hubs &amp; gateways — <span class="mono">AS/NZS 62368.1</span> (IT/AV)</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Big EMC story: <span class="mono">CISPR 32</span> + ACMA radiocomms (Wi-Fi/Zigbee/BLE) — all inside the one RCM</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Low-voltage DC sensors — the classic <b>in-scope / out-of-scope</b> judgment call</li>
+        </ul>
+      </div>
+      <div class="card lv l2"><span class="lv-n" style="color:var(--gems)">🔌 GEMS/MEPS</span><h3>Always-on energy</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><b>External power supplies</b> — a regulated GEMS class (the EPS Determination)</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Standby power limits (≤1&nbsp;W) for always-on devices</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Energy-monitoring smart plugs — measuring what the label promises</li>
+        </ul>
+      </div>
+      <div class="card lv l1"><span class="lv-n" style="color:var(--fire)">🔥 ActivFire</span><h3>Connected fire safety</h3>
+        <ul style="margin:6px 0 0;padding-left:16px">
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Connected smoke alarms — <span class="mono">AS 3786</span> (2023 edition per TS-007)</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px">Smart fire detection &amp; alarm connectivity — IoT meets the ActivFire register</li>
+          <li style="font-size:12.5px;color:var(--ink-2)">Where firmware updates touch certified products — the change-control discipline</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>The through-line for the interview:</b> "Rail taught me the NSW declared-article world, manufacturing taught me motor-efficiency MEPS and plant suppression, and IoT taught me the EMC + radiocomms side of the RCM. At Legrand all three meet in one building — that's why this role fits."</div></div>
   </section>
 
   <!-- ============ PANEL: CHEAT SHEET ============ -->
