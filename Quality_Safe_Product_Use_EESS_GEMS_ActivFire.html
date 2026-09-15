@@ -1,0 +1,925 @@
+<title>Compliance Bench</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#F1F3F6; --surface:#FFFFFF; --surface-2:#E7EBF1; --surface-3:#DCE2EA;
+  --ink:#16212E; --ink-2:#4A5A6C; --ink-3:#7A8A9C; --line:#C9D2DE;
+  --brand:#1F4E79; --brand-ink:#FFFFFF;
+  --eess:#B45309; --eess-soft:#F5E7D3; --eess-line:#E2C9A4;
+  --gems:#1E7A4F; --gems-soft:#DCEFE4; --gems-line:#B7D9C5;
+  --fire:#B23A3A; --fire-soft:#F4DEDE; --fire-line:#E0B6B6;
+  --ok:#0F766E; --ok-soft:#D9EFEB;
+  --warn:#8A5A00; --warn-soft:#F7ECD2;
+  --radius:6px; --radius-sm:4px;
+  --shadow:0 1px 2px rgba(22,33,46,.08), 0 4px 14px rgba(22,33,46,.06);
+  --font-d:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --font-m:"IBM Plex Mono","Courier New",monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E141B; --surface:#16202B; --surface-2:#1D2A38; --surface-3:#24333F;
+    --ink:#E9EEF4; --ink-2:#9FB0C2; --ink-3:#6E8094; --line:#2C3A4A;
+    --brand:#6E9CC9; --brand-ink:#0E141B;
+    --eess:#E8A33D; --eess-soft:#2E2413; --eess-line:#57451F;
+    --gems:#4FBF8A; --gems-soft:#14291F; --gems-line:#2C4A3A;
+    --fire:#E07171; --fire-soft:#301A1A; --fire-line:#59302F;
+    --ok:#4FC3B5; --ok-soft:#122E2A;
+    --warn:#D9A93D; --warn-soft:#2E2513;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E141B; --surface:#16202B; --surface-2:#1D2A38; --surface-3:#24333F;
+  --ink:#E9EEF4; --ink-2:#9FB0C2; --ink-3:#6E8094; --line:#2C3A4A;
+  --brand:#6E9CC9; --brand-ink:#0E141B;
+  --eess:#E8A33D; --eess-soft:#2E2413; --eess-line:#57451F;
+  --gems:#4FBF8A; --gems-soft:#14291F; --gems-line:#2C4A3A;
+  --fire:#E07171; --fire-soft:#301A1A; --fire-line:#59302F;
+  --ok:#4FC3B5; --ok-soft:#122E2A;
+  --warn:#D9A93D; --warn-soft:#2E2513;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 4px 14px rgba(0,0,0,.35);
+}
+
+/* ============ BASE ============ */
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--font-d); font-size:16px; line-height:1.55;
+  padding:0 clamp(16px,4vw,40px) 64px;
+}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{text-wrap:balance}
+a{color:var(--brand)}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:2px}
+.mono{font-family:var(--font-m)}
+.tn{font-variant-numeric:tabular-nums}
+[hidden]{display:none!important}
+
+/* ============ HERO ============ */
+.hero{padding-block:40px 8px;display:grid;grid-template-columns:1.7fr 1fr;gap:32px;align-items:end}
+.eyebrow{font-family:var(--font-m);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+.hero h1{font-size:clamp(30px,4.6vw,46px);font-weight:800;letter-spacing:-.02em;line-height:1.04;margin:0 0 14px}
+.hero h1 .reg{color:var(--brand)}
+.hero .lede{font-size:16.5px;color:var(--ink-2);max-width:56ch;margin:0}
+.howto{font-family:var(--font-m);font-size:12.5px;color:var(--ink-3);margin:14px 0 0}
+.howto b{color:var(--ink-2);font-weight:600}
+
+.stamp{
+  border:2.5px solid var(--ink);border-radius:var(--radius);
+  padding:18px 16px 14px;transform:rotate(-2deg);
+  background:var(--surface);box-shadow:var(--shadow);
+  font-family:var(--font-m);text-align:center;
+}
+.stamp .rule{font-weight:600;font-size:13px;letter-spacing:.08em;line-height:1.5}
+.stamp .sub{font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em}
+.stamp .tick{color:var(--ok);font-size:20px;line-height:1;display:block;margin-bottom:6px}
+
+/* ============ EVIDENCE PIPELINE ============ */
+.pipeline{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:28px 0 8px}
+.pipe-step{
+  flex:1 1 180px;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow);
+  display:flex;gap:10px;align-items:center;min-width:160px;
+}
+.pipe-step .n{font-family:var(--font-m);font-weight:600;color:var(--brand);font-size:13px}
+.pipe-step .t{font-weight:700;font-size:14px}
+.pipe-step .s{font-size:12px;color:var(--ink-2);line-height:1.35}
+.pipe-arrow{align-self:center;color:var(--ink-3);font-size:18px;padding:0 2px}
+
+/* ============ TABS ============ */
+.tabs{position:sticky;top:0;z-index:20;background:var(--bg);margin:24px -4px 0;padding:10px 4px 12px}
+.tabrow{display:flex;gap:6px;flex-wrap:wrap}
+.tab{
+  appearance:none;border:1px solid var(--line);background:var(--surface);
+  color:var(--ink-2);font-family:var(--font-d);font-weight:600;font-size:13.5px;
+  padding:9px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.tab:hover{border-color:var(--brand);color:var(--brand)}
+.tab[aria-selected="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.tab .em{margin-right:6px}
+
+.panel{padding-top:18px}
+.panel > h2{margin:0 0 4px;font-size:24px;font-weight:800;letter-spacing:-.01em}
+.panel .subhead{color:var(--ink-2);margin:0 0 20px;max-width:70ch;font-size:15px}
+
+/* ============ PATTERN CARDS ============ */
+.pattern{
+  background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--brand);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 18px;margin:18px 0;display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;
+}
+.pattern .p-icon{font-size:22px;line-height:1.2}
+.pattern .p-body{flex:1 1 300px}
+.pattern .p-body b{font-weight:700}
+.pattern .p-body{font-size:14.5px;color:var(--ink-2)}
+.pattern.eess{border-left-color:var(--eess)}
+.pattern.gems{border-left-color:var(--gems)}
+.pattern.fire{border-left-color:var(--fire)}
+.pattern.warn{border-left-color:var(--warn);background:var(--warn-soft)}
+
+.grid{display:grid;gap:14px;margin:18px 0}
+.grid.g3{grid-template-columns:repeat(3,1fr)}
+.grid.g2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:820px){.grid.g3,.grid.g2{grid-template-columns:1fr}}
+
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:16px 18px;
+}
+.card h3{margin:0 0 6px;font-size:15.5px;font-weight:700}
+.card p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.card .code{font-family:var(--font-m);font-size:12px;color:var(--brand);margin-top:8px;display:block}
+.card .tag{
+  display:inline-block;font-family:var(--font-m);font-size:11px;letter-spacing:.05em;
+  text-transform:uppercase;padding:3px 8px;border-radius:999px;margin-bottom:8px;
+  border:1px solid currentColor;
+}
+
+/* ============ STAGE STEPPER ============ */
+.stepper{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 6px}
+.stage{
+  appearance:none;cursor:pointer;border:1px solid var(--line);background:var(--surface);
+  color:var(--ink-2);font-family:var(--font-d);font-weight:600;font-size:13px;
+  padding:8px 12px;border-radius:var(--radius);text-align:left;
+}
+.stage .st-n{display:block;font-family:var(--font-m);font-size:10.5px;color:var(--ink-3);letter-spacing:.08em;margin-bottom:1px}
+.stage:hover{border-color:var(--brand);color:var(--brand)}
+.stage[aria-selected="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.stage[aria-selected="true"] .st-n{color:var(--brand-ink);opacity:.75}
+.stage.eess-sel[aria-selected="true"]{background:var(--eess);border-color:var(--eess)}
+.stage.gems-sel[aria-selected="true"]{background:var(--gems);border-color:var(--gems)}
+.stage.fire-sel[aria-selected="true"]{background:var(--fire);border-color:var(--fire)}
+
+.stagedetail{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;margin-top:10px;min-height:180px;
+}
+.stagedetail h4{margin:0 0 8px;font-size:17px;font-weight:700}
+.stagedetail p{margin:0 0 10px;font-size:14.5px;color:var(--ink-2);max-width:80ch}
+.stagedetail ul{margin:0 0 6px;padding-left:20px}
+.stagedetail li{font-size:14px;color:var(--ink-2);margin-bottom:5px}
+.stagedetail .verdict{
+  font-family:var(--font-m);font-size:12.5px;background:var(--surface-2);
+  border:1px dashed var(--line);border-radius:var(--radius-sm);padding:10px 12px;margin-top:10px;
+}
+.stagedetail .verdict b{color:var(--ink)}
+
+/* ============ RISK LEVELS ============ */
+.lv{border-top:4px solid var(--surface-3)}
+.lv.l1{border-top-color:var(--gems)}
+.lv.l2{border-top-color:var(--warn)}
+.lv.l3{border-top-color:var(--fire)}
+.lv .lv-n{font-family:var(--font-m);font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.lv.l1 .lv-n{color:var(--gems)} .lv.l2 .lv-n{color:var(--warn)} .lv.l3 .lv-n{color:var(--fire)}
+.lv ul{margin:8px 0 0;padding-left:18px}
+.lv li{font-size:13px;color:var(--ink-2);margin-bottom:4px}
+
+/* ============ MARKS ============ */
+.marks{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0}
+.mark{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px;display:flex;gap:12px;align-items:center;flex:1 1 220px;
+}
+.mark svg{flex:0 0 auto;color:var(--ink)}
+.mark .m-t{font-weight:700;font-size:14px}
+.mark .m-s{font-size:12.5px;color:var(--ink-2);margin-top:2px;line-height:1.4}
+
+/* ============ ROUTER ============ */
+.router{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-top:8px}
+@media (max-width:820px){.router{grid-template-columns:1fr}}
+.products{display:flex;flex-direction:column;gap:8px}
+.prod{
+  appearance:none;cursor:pointer;text-align:left;border:1px solid var(--line);
+  background:var(--surface);border-radius:var(--radius);padding:11px 13px;
+  font-family:var(--font-d);
+}
+.prod .p-name{font-weight:700;font-size:13.5px;color:var(--ink)}
+.prod .p-fam{font-size:11.5px;color:var(--ink-3);font-family:var(--font-m);margin-top:2px}
+.prod:hover{border-color:var(--brand)}
+.prod[aria-selected="true"]{border-color:var(--brand);background:var(--surface-2);box-shadow:inset 3px 0 0 var(--brand)}
+.routebox{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px 22px;
+}
+.routebox h4{margin:0 0 2px;font-size:18px;font-weight:800}
+.routebox .r-fam{font-family:var(--font-m);font-size:12px;color:var(--ink-3);margin-bottom:14px}
+.routebox h5{margin:16px 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-family:var(--font-m)}
+.verdicts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.vpill{
+  font-family:var(--font-m);font-size:12px;font-weight:600;padding:5px 10px;
+  border-radius:999px;border:1px solid currentColor;
+}
+.vpill.yes{color:var(--fire)} .vpill.no{color:var(--ok)} .vpill.check{color:var(--warn)}
+.routebox p{font-size:14px;color:var(--ink-2);margin:0 0 8px;max-width:72ch}
+.routebox .steps{counter-reset:r;margin:6px 0 0;padding:0;list-style:none}
+.routebox .steps li{
+  counter-increment:r;font-size:13.5px;color:var(--ink-2);margin-bottom:6px;padding-left:26px;position:relative;
+}
+.routebox .steps li::before{
+  content:counter(r);position:absolute;left:0;top:1px;width:18px;height:18px;
+  border:1px solid var(--brand);color:var(--brand);border-radius:50%;
+  font-family:var(--font-m);font-size:10.5px;display:flex;align-items:center;justify-content:center;
+}
+
+/* ============ QUIZ ============ */
+.quiz{max-width:760px;margin-top:6px}
+.q-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:22px 24px;margin-bottom:14px;
+}
+.q-card .q-n{font-family:var(--font-m);font-size:11.5px;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase}
+.q-card h3{margin:6px 0 14px;font-size:17.5px;font-weight:700;line-height:1.35}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  appearance:none;cursor:pointer;text-align:left;border:1px solid var(--line);
+  background:var(--bg);border-radius:var(--radius);padding:11px 14px;
+  font-family:var(--font-d);font-size:14px;color:var(--ink);
+}
+.opt:hover{border-color:var(--brand)}
+.opt[aria-disabled="true"]{cursor:default}
+.opt.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ink)}
+.opt.wrong{background:var(--fire-soft);border-color:var(--fire);color:var(--ink)}
+.feedback{margin-top:12px;font-size:14px;color:var(--ink-2);border-left:3px solid var(--brand);padding-left:12px}
+.feedback b{color:var(--ink)}
+.scorebar{font-family:var(--font-m);font-size:13px;color:var(--ink-2);margin-bottom:12px}
+.restart{
+  appearance:none;cursor:pointer;border:1px solid var(--brand);background:transparent;color:var(--brand);
+  font-family:var(--font-d);font-weight:600;font-size:13px;padding:8px 16px;border-radius:999px;
+}
+
+/* ============ TABLE ============ */
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);margin:18px 0}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:13px}
+th{
+  font-family:var(--font-m);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  text-align:left;padding:10px 14px;border-bottom:2px solid var(--line);color:var(--ink-2);background:var(--surface-2);
+}
+td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2)}
+tr:last-child td{border-bottom:none}
+td b{color:var(--ink)}
+td.mono{font-family:var(--font-m);font-size:12px}
+
+.checklist{counter-reset:c;list-style:none;padding:0;margin:14px 0}
+.checklist li{
+  counter-increment:c;position:relative;padding:10px 14px 10px 46px;margin-bottom:8px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  font-size:14px;color:var(--ink-2);
+}
+.checklist li::before{
+  content:counter(c);position:absolute;left:12px;top:10px;width:22px;height:22px;
+  background:var(--brand);color:var(--brand-ink);border-radius:50%;
+  font-family:var(--font-m);font-size:11px;display:flex;align-items:center;justify-content:center;
+}
+.checklist li b{color:var(--ink)}
+
+.footer{margin-top:48px;border-top:1px solid var(--line);padding-top:16px;font-size:12.5px;color:var(--ink-3)}
+.footer a{color:var(--ink-2)}
+.footer .src{font-family:var(--font-m);font-size:11.5px}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Quality &amp; Safe Product Use · AU Regulatory Frameworks · Interview Trainer</p>
+      <h1>Unified product testing &amp; validation — <span class="reg">certify before you supply</span></h1>
+      <p class="lede">One protocol, three regulators: electrical safety (<span class="mono">EESS</span>), energy performance (<span class="mono">GEMS/MEPS</span>), fire protection (<span class="mono">ActivFire</span>). Every product follows the same spine — test reports, database registrations, labelling approvals — before commercial release.</p>
+      <p class="howto">How to use: <b>pick a scheme tab</b>, then <b>click each stage</b> of the compliance journey to drill down. <b>Route a product</b> through the Legrand catalogue, then <b>test yourself</b> in the quiz.</p>
+    </div>
+    <aside class="stamp" aria-hidden="true">
+      <span class="tick">✔</span>
+      <div class="rule">NOTHING IS SUPPLIED UNTIL IT'S REGISTERED, MARKED &amp; DECLARED</div>
+      <div class="sub">THE GOLDEN RULE · 100% COMPLIANCE VERIFICATION PRIOR TO RELEASE</div>
+    </aside>
+  </header>
+
+  <!-- EVIDENCE PIPELINE -->
+  <nav class="pipeline" aria-label="The evidence pipeline">
+    <div class="pipe-step"><span class="n">01</span><div><div class="t">Test Reports</div><div class="s">ISO&nbsp;17025 / NATA labs, AS/NZS standards</div></div></div>
+    <span class="pipe-arrow" aria-hidden="true">→</span>
+    <div class="pipe-step"><span class="n">02</span><div><div class="t">Database Registrations</div><div class="s">EESS · E3 energy register · ActivFire register</div></div></div>
+    <span class="pipe-arrow" aria-hidden="true">→</span>
+    <div class="pipe-step"><span class="n">03</span><div><div class="t">Labelling Approvals</div><div class="s">RCM mark · energy star label · ActivFire listing</div></div></div>
+    <span class="pipe-arrow" aria-hidden="true">→</span>
+    <div class="pipe-step"><span class="n">04</span><div><div class="t">Commercial Release</div><div class="s">SDOC &amp; compliance folder on file in the QMS</div></div></div>
+  </nav>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tabrow" role="tablist" aria-label="Learning modules">
+      <button class="tab" role="tab" aria-selected="true" data-tab="launch"><span class="em">🧭</span>Launch Gate</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="eess"><span class="em">⚡</span>EESS</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="gems"><span class="em">🔌</span>GEMS/MEPS</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="fire"><span class="em">🔥</span>ActivFire</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="router"><span class="em">🗄️</span>Data Centre Router</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="quiz"><span class="em">✅</span>Quiz</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="cheat"><span class="em">📚</span>Cheat Sheet</button>
+    </div>
+  </div>
+
+  <!-- ============ PANEL: LAUNCH GATE ============ -->
+  <section class="panel" role="tabpanel" id="panel-launch">
+    <h2>The 10-step launch gate</h2>
+    <p class="subhead">The full protocol, spoken as a ~2-minute interview answer: <i>"When a new product comes from the factory, my first move is classification — I don't start any registration until I know which schemes it's caught by."</i></p>
+    <ol class="checklist">
+      <li><b>Classify under EESS.</b> In-scope check: low voltage, 50–1000&nbsp;V&nbsp;AC, household-type use. Then risk level via <span class="mono">AS/NZS 4417.2</span> — Level 1, 2 or 3.</li>
+      <li><b>Test to the right standard.</b> Applicable AS/NZS product standard through an ISO&nbsp;17025-accredited lab; keep the test reports under document control.</li>
+      <li><b>Level 3? Get the Certificate of Conformity first.</b> High-risk equipment can't be registered without a CoC from an accredited certifier. Track its expiry.</li>
+      <li><b>Confirm Responsible Supplier status.</b> The AU entity holding the ABN that manufactures or imports must be registered, with an Authorised Officer declaration, renewed annually.</li>
+      <li><b>Register the equipment.</b> Mandatory for Levels 2 &amp; 3. For Level 3 the registration term (1/2/5 yrs) can't outlast the CoC.</li>
+      <li><b>Apply the RCM mark.</b> Only after registration, per <span class="mono">AS/NZS 4417</span> marking rules. The RCM also carries EMC obligations.</li>
+      <li><b>Build the compliance folder and SDOC.</b> Supplier Declaration of Compliance cross-referenced to test reports, CoC and registration number — answer the regulator in days, not weeks.</li>
+      <li><b>Check GEMS.</b> In a regulated product class (lighting, motors, appliances)? Verify MEPS per the Determination, register on the energy register, apply the label where required.</li>
+      <li><b>ActivFire, if fire-related.</b> CSIRO scheme: Certificate of Conformity, register listing, Factory Production Control audits under the 2026 changes.</li>
+      <li><b>Ongoing control.</b> Renewal calendar driven by CoC/registration expiries, standard-change monitoring — and any check-test failure flows straight into NCR/CAPA.</li>
+    </ol>
+    <div class="pattern"><span class="p-icon">🔑</span><div class="p-body"><b>The golden rule:</b> nothing is supplied until it's registered, marked and declared. The two orderings interviewers probe: <b>registration comes BEFORE supply</b>, and <b>Level 3 needs its CoC BEFORE registration</b>.</div></div>
+  </section>
+
+  <!-- ============ PANEL: EESS ============ -->
+  <section class="panel" role="tabpanel" id="panel-eess" hidden>
+    <h2>⚡ EESS — Electrical Equipment Safety System</h2>
+    <p class="subhead">AU/NZ electrical safety (plus EMC) for in-scope equipment: low-voltage (50–1000&nbsp;V&nbsp;AC / 120–1500&nbsp;V&nbsp;DC) gear designed for <b>household or similar use</b>. Run by state regulators under the national framework (ERAC).</p>
+    <div class="stepper" role="tablist" aria-label="EESS stages">
+      <button class="stage eess-sel" role="tab" aria-selected="true" data-stage="e0">1. Scope &amp; classify</button>
+      <button class="stage eess-sel" role="tab" aria-selected="false" data-stage="e1">2. Test</button>
+      <button class="stage eess-sel" role="tab" aria-selected="false" data-stage="e2">3. Certify (L3)</button>
+      <button class="stage eess-sel" role="tab" aria-selected="false" data-stage="e3">4. Register</button>
+      <button class="stage eess-sel" role="tab" aria-selected="false" data-stage="e4">5. Mark</button>
+      <button class="stage eess-sel" role="tab" aria-selected="false" data-stage="e5">6. Release</button>
+      <button class="stage eess-sel" role="tab" aria-selected="false" data-stage="e6">7. Ongoing + NSW</button>
+    </div>
+    <div class="stagedetail" id="stage-e0">
+      <h4>Scope check &amp; risk classification</h4>
+      <p>Two questions decide everything: is it <b>in-scope</b> (voltage + household-type use), and what's its <b>risk level</b>? The use and voltage decide it — not the brand. A product used in a home is household-type even if sold to a business.</p>
+      <div class="grid g3">
+        <div class="card lv l1"><span class="lv-n">Level 1 · Low</span><h3>Self-declared</h3><p>No registration needed — but must still carry the RCM mark. Lamps/bulbs, computers, monitors, printers, audio, telecoms.</p></div>
+        <div class="card lv l2"><span class="lv-n">Level 2 · Medium</span><h3>Registered</h3><p>Registered on the national database by a Responsible Supplier; keep a compliance folder (test reports) ready for regulators. Kettles, toasters, fans, <b>luminaires</b>, hair dryers.</p></div>
+        <div class="card lv l3"><span class="lv-n">Level 3 · High</span><h3>Certified + registered</h3><p>Certificate of Conformity from an accredited certifier is mandatory <b>before</b> registration. Plugs, socket outlets, power boards, battery chargers, portable tools.</p></div>
+      </div>
+      <div class="verdict"><b>Classification anchor:</b> <span class="mono">AS/NZS 4417.2</span> (risk levels) · <span class="mono">AS/NZS 3820</span> (essential safety requirements)</div>
+    </div>
+    <div class="stagedetail" id="stage-e1" hidden>
+      <h4>Testing</h4>
+      <p>Test to the matching product standard at a NATA/ILAC/CBTL lab. Sydney loop: <b>EMC Technologies</b> (Seven Hills — safety + EMC), <b>Austest Laboratories</b> (CB scheme).</p>
+      <ul>
+        <li><span class="mono">AS/NZS 60335.1</span> appliances · <span class="mono">60598.1</span> luminaires · <span class="mono">61558.1</span> power supplies/transformers · <span class="mono">62368.1</span> IT/AV · <span class="mono">3112</span> plugs/sockets</li>
+        <li><span class="mono">AS/NZS CISPR 32</span> for EMC emissions</li>
+        <li>Typical tests: dielectric withstand (hi-pot), earth continuity, leakage current, temperature rise, glow-wire flammability, creepage/clearance, IP ingress (<span class="mono">AS 60529</span>)</li>
+        <li>Samples: 2–6 production-state units, full accessories + nameplate</li>
+      </ul>
+      <div class="verdict"><b>Level 3 rule:</b> tested by NATA/IANZ/ILAC-MRA or CBTL lab — no exceptions.</div>
+    </div>
+    <div class="stagedetail" id="stage-e2" hidden>
+      <h4>Certification — Level 3 only</h4>
+      <p>L1 and L2 skip this step. For L3, a <b>JAS-ANZ accredited certifier</b> reviews the test evidence and issues the Certificate of Conformity.</p>
+      <ul>
+        <li>Certifiers: <b>SAA Approvals</b> (largest private certifier), TÜV SÜD, TÜV Rheinland, UL, EESS Conformity Certification Services</li>
+        <li>The CoC expiry date is the anchor for the registration term</li>
+        <li>Certifier work is done remotely — physical proximity doesn't matter; lab proximity does</li>
+      </ul>
+      <div class="verdict"><b>Ordering trap:</b> CoC comes <b>BEFORE</b> registration. Say it the right way round in the interview.</div>
+    </div>
+    <div class="stagedetail" id="stage-e3" hidden>
+      <h4>Registration</h4>
+      <p>Two registrations: the <b>Responsible Supplier</b> (the ABN entity that manufactures/imports, with an Authorised Officer declaration, renewed <b>annually</b>) and the <b>equipment</b> (Levels 2 &amp; 3) on the national EESS Registration Database.</p>
+      <ul>
+        <li>Level 3 registration term: 1, 2 or 5 years — <b>cannot outlast the CoC expiry</b></li>
+        <li>Level 3 certificate details upload to the National Certification Database</li>
+        <li>New consolidated EESS platform launched Dec 2024 at eess.gov.au</li>
+      </ul>
+    </div>
+    <div class="stagedetail" id="stage-e4" hidden>
+      <h4>Marking — the RCM</h4>
+      <div class="marks">
+        <div class="mark">
+          <svg width="40" height="34" viewBox="0 0 40 34" aria-label="RCM mark"><path d="M20 2 L38 32 H2 Z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M13 17.5 L18 23 L28 11" fill="none" style="stroke:var(--ok)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><div class="m-t">RCM — Regulatory Compliance Mark</div><div class="m-s">Triangle + tick. Applied <b>only after registration</b> (<span class="mono">AS/NZS 4417</span>). Carries both electrical safety (EESS) and EMC (ACMA) obligations.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stagedetail" id="stage-e5" hidden>
+      <h4>Release &amp; declare</h4>
+      <p>Compile the <b>SDOC</b> (Supplier Declaration of Compliance) cross-referenced to test reports, CoC and registration number, held in the controlled document system. Regulator asks → answer in days.</p>
+      <ul>
+        <li>Compliance folder available to regulators, typically within <b>10–14 days</b> if requested</li>
+        <li>Gate the release: <b>no registration, no mark, no supply</b></li>
+      </ul>
+    </div>
+    <div class="stagedetail" id="stage-e6" hidden>
+      <h4>Ongoing — and the NSW dual track</h4>
+      <p>Renewals, certifier surveillance audits, standard-change monitoring — and the Sydney-specific nugget that builds instant credibility:</p>
+      <ul>
+        <li><b>NSW runs its own approval system</b> (66 declared classes) alongside the national EESS. Fair Trading gazettes REAS certifiers; there's a separate NSW Approved Electrical Articles register</li>
+        <li>Since <b>13 Nov 2020</b> a REAS approval can no longer authorise the national RCM — new models get the REAS mark (<span class="mono">ABC-xxxxxx-EA</span>, e.g. <span class="mono">SAA-2024-001-EA</span>)</li>
+        <li><b>One test report → two applications → two marks</b>: RCM nationally + NSW approval mark in NSW</li>
+        <li>Penalty for selling unapproved declared articles in NSW: up to <b>$825,000</b> for corporations</li>
+      </ul>
+      <div class="verdict"><b>Where compliance dies:</b> change control — a cheaper capacitor or a factory move voids the certificate. Re-assess before the change ships.</div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: GEMS ============ -->
+  <section class="panel" role="tabpanel" id="panel-gems" hidden>
+    <h2>🔌 GEMS/MEPS — Greenhouse &amp; Energy Minimum Standards</h2>
+    <p class="subhead">National energy-efficiency law (<span class="mono">GEMS Act 2012</span>, Cth) enforced by the GEMS Regulator. <b>MEPS</b> = minimum energy performance standard per product class. The mental model: <b>a tax authority</b> — you declare compliance with a lab's evidence, and the regulator audits you after the fact.</p>
+    <div class="stepper" role="tablist" aria-label="GEMS stages">
+      <button class="stage gems-sel" role="tab" aria-selected="true" data-stage="g0">1. Scope</button>
+      <button class="stage gems-sel" role="tab" aria-selected="false" data-stage="g1">2. Test</button>
+      <button class="stage gems-sel" role="tab" aria-selected="false" data-stage="g2">3. Certify? None</button>
+      <button class="stage gems-sel" role="tab" aria-selected="false" data-stage="g3">4. Register</button>
+      <button class="stage gems-sel" role="tab" aria-selected="false" data-stage="g4">5. Mark</button>
+      <button class="stage gems-sel" role="tab" aria-selected="false" data-stage="g5">6. Check-tests</button>
+    </div>
+    <div class="stagedetail" id="stage-g0">
+      <h4>Is the SKU in a regulated product class?</h4>
+      <p>Each class is governed by a <b>GEMS Determination</b> (a legislative instrument). Products can't legally be supplied in Australia without registration.</p>
+      <ul>
+        <li>Household: fridges, air conditioners, washers, dishwashers, dryers, TVs, <b>LED/CFL lamps</b>, water heaters</li>
+        <li>IT/standby: computers, monitors, external power supplies, set-top boxes</li>
+        <li>Commercial/industrial: three-phase motors, distribution transformers, refrigerated display cabinets, pool pumps</li>
+        <li>Fresh example: <b>LED Lamps Determination 2025</b> — MEPS in force from <b>3 Mar 2026</b></li>
+      </ul>
+      <div class="verdict"><b>Rule of thumb:</b> "anything that consumes significant energy" — check the regulated class list; motors and transformers count even in factories.</div>
+    </div>
+    <div class="stagedetail" id="stage-g1" hidden>
+      <h4>Testing — the lab you commission</h4>
+      <p>You choose and pay an accredited lab (NATA / ISO&nbsp;17025 / ILAC-MRA). It runs the test method from the Determination. Sydney: <b>CHOICE Test Research</b> (NATA #1702 — fridges, washers, TVs), <b>EMC Technologies</b> Seven Hills (ACs, motors, lighting, external power supplies), <b>Comtest</b> (standby power, monitors).</p>
+      <ul>
+        <li>Annual energy consumption (AEC), standby power (≤1&nbsp;W limits), COP/EER for ACs</li>
+        <li>LED lamps: luminous efficacy + 3,600-hour lumen-maintenance endurance</li>
+        <li>Motors: efficiency to <span class="mono">IEC 60034-2-1</span></li>
+        <li>Report includes star-rating calculations + uncertainty budget</li>
+      </ul>
+    </div>
+    <div class="stagedetail" id="stage-g2" hidden>
+      <h4>No certifier — by design</h4>
+      <p><b>There is no certifier in GEMS.</b> The test report <i>is</i> your evidence; the regulator trusts your declaration — and check-tests you afterwards, like a tax authority. This contrasts with EESS L3 and ActivFire, where an independent body pre-approves you.</p>
+      <div class="verdict"><b>One-line mental model:</b> EESS L3 = <b>certify-then-supply</b> · GEMS = <b>declare-then-supply</b> (audited after).</div>
+    </div>
+    <div class="stagedetail" id="stage-g3" hidden>
+      <h4>Self-registration on the E3 register</h4>
+      <ul>
+        <li>Account on the Energy Rating Product Registration system (<span class="mono">reg.energyrating.gov.au</span>) as the AU entity with the ABN</li>
+        <li>Upload test report + product docs (specs, model list, label artwork)</li>
+        <li>Fee ~<b>$440–780</b> per application · assessment up to <b>42 days</b> · valid generally <b>5 years</b></li>
+        <li>Family registrations use the representative / worst-case model</li>
+        <li>Annual compliance report: units sold per registered model, by <b>31 October</b> each year</li>
+      </ul>
+    </div>
+    <div class="stagedetail" id="stage-g4" hidden>
+      <h4>Marking — the energy rating label</h4>
+      <div class="marks">
+        <div class="mark">
+          <svg width="56" height="34" viewBox="0 0 56 34" aria-label="Energy star rating" style="color:var(--eess)"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 26 l2.6-6 2.6 6"/><path d="M15.2 26 l-1-2.2 h-3.4 l-1 2.2"/></g><text x="22" y="24" font-size="13" fill="currentColor">★★★</text><text x="24" y="33" font-size="8" font-family="monospace" style="fill:var(--ink-2)">ENERGY RATING</text></svg>
+          <div><div class="m-t">Energy Rating Label (stars)</div><div class="m-s">On labelling classes, matching the registered data. MEPS-only products (e.g. motors) have <b>no label</b> — registration itself is the requirement.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stagedetail" id="stage-g5" hidden>
+      <h4>Regulator check-testing — your post-launch exposure</h4>
+      <p>The GEMS Regulator selects <b>~60–70 models per year</b> using a risk-based approach (compliance history, product class, lab used). Products are bought off the market or demanded from you.</p>
+      <ul>
+        <li><b>Stage 1:</b> regulator tests against the registered standard</li>
+        <li><b>Stage 2</b> (if Stage 1 fails): further testing <b>at your expense</b> — labelling: 3 units, average must pass · performance: 2 units (3rd only if one fails), majority must pass</li>
+        <li>Both fail: <b>registration cancelled</b> — the model can't be supplied, <b>sibling models sharing the test report also cancelled</b>, fines (~60 penalty units ≈ <b>$12,600</b> + daily penalties), published suspension list</li>
+        <li>Your move: quarantine stock → root cause → CAPA → re-test → re-apply; link it to warranty exposure (non-compliant units in the field = recall risk)</li>
+      </ul>
+      <div class="verdict"><b>Leverage point:</b> keep the registered test reports, sample records and label data <b>consistent with actual production</b> — a check-test replicates your registered claim, not your current spec.</div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: ACTIVFIRE ============ -->
+  <section class="panel" role="tabpanel" id="panel-fire" hidden>
+    <h2>🔥 ActivFire — fire performance (CSIRO)</h2>
+    <p class="subhead">CSIRO's product certification scheme for <b>active</b> fire protection — anything that <b>detects or suppresses</b> fire. Governed by <span class="mono">AF-D001</span> Rules; verified against AS standards plus CSIRO Technical Specifications.</p>
+    <div class="stepper" role="tablist" aria-label="ActivFire stages">
+      <button class="stage fire-sel" role="tab" aria-selected="true" data-stage="f0">1. Scope</button>
+      <button class="stage fire-sel" role="tab" aria-selected="false" data-stage="f1">2. Test</button>
+      <button class="stage fire-sel" role="tab" aria-selected="false" data-stage="f2">3. Certify</button>
+      <button class="stage fire-sel" role="tab" aria-selected="false" data-stage="f3">4. Register</button>
+      <button class="stage fire-sel" role="tab" aria-selected="false" data-stage="f4">5. Ongoing: FPC</button>
+    </div>
+    <div class="stagedetail" id="stage-f0">
+      <h4>Is it active fire protection?</h4>
+      <p>Detection: smoke alarms, heat detectors, call points, sounders, fire alarm panels (FDCIE). Suppression: extinguishers, sprinkler heads &amp; pipes, kitchen/vehicle suppression, gaseous &amp; condensed aerosol. Components: hoses, monitor assemblies, panel batteries. <b>Emergency &amp; exit lighting</b> certifies here too (<span class="mono">AS 2293.3</span>).</p>
+      <ul>
+        <li>CSIRO issues a <b>Verification Plan</b> (AF-D001) naming the applicable AS standard / TS, test agency and fees</li>
+        <li>Rule of thumb: "anything that DETECTS or SUPPRESSES fire"</li>
+      </ul>
+    </div>
+    <div class="stagedetail" id="stage-f1" hidden>
+      <h4>Testing — and scheme witnessing</h4>
+      <ul>
+        <li>Standards: <span class="mono">AS 3786</span> (smoke alarms, 2023 ed. per TS-007), <span class="mono">AS 7240</span> (detection), <span class="mono">AS/NZS 1841</span> (extinguishers), <span class="mono">AS 2118</span> (sprinklers), plus CSIRO TS-007/TS-016/TS-027…</li>
+        <li>Labs: CSIRO Fire Systems Lab Clayton VIC; CSIRO Fire Technology Lab North Ryde (closing mid-2027 — scheme unaffected)</li>
+        <li><b>Since Jan 2026 (AN-020): fire tests for suppression are SCHEME-WITNESSED</b> — no more direct acceptance of third-party certification</li>
+        <li>Typical tests: detector sensitivity &amp; environmental exposure, extinguisher fire ratings (e.g. 1A/21B), sprinkler discharge/K-factor, full-scale extinguishment</li>
+      </ul>
+    </div>
+    <div class="stagedetail" id="stage-f2" hidden>
+      <h4>Certification — CSIRO itself</h4>
+      <p><b>CSIRO Verification Services</b> is the scheme operator and the only certifier. Certificates of Conformity are issued <b>per agent/distributor</b>.</p>
+    </div>
+    <div class="stagedetail" id="stage-f3" hidden>
+      <h4>Registration &amp; marking</h4>
+      <ul>
+        <li>Products listed on the public <b>ActivFire Register of Fire Protection Equipment</b></li>
+        <li>No RCM here — the ActivFire certificate/listing is the mark; labels &amp; manuals per Advisory Note <b>AN-014</b></li>
+      </ul>
+    </div>
+    <div class="stagedetail" id="stage-f4" hidden>
+      <h4>Ongoing — FPC audits (the 2026 change)</h4>
+      <p>Advisory Note <b>AN-020</b>, effective <b>1 Jan 2026</b>, changed the scheme's rhythm:</p>
+      <ul>
+        <li><b>FPC (Factory Production Control) audits</b> introduced for detection/suppression — very ISO&nbsp;9001-flavoured factory audits (your QMS internal-audit program maps straight on)</li>
+        <li>Scheme witnessing of fire tests (above)</li>
+        <li>Audits extended progressively to <b>existing</b> certified products, not just new ones</li>
+        <li>Plus: batch sampling, product-change verification, Advisory Note monitoring</li>
+      </ul>
+      <div class="verdict"><b>Interview line:</b> "AN-020 brought ActivFire into an ISO 9001 world — FPC audits, witnessed tests, change verification. That's exactly the discipline I run."</div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: ROUTER ============ -->
+  <section class="panel" role="tabpanel" id="panel-router" hidden>
+    <h2>🗄️ Data Centre Router — Legrand products</h2>
+    <p class="subhead">Route a Legrand product through the frameworks. Click a product to see its compliance path. Grey-space = power infrastructure; white-space = IT equipment. Where scope is genuinely arguable, the router says <b>check</b> — in an interview, knowing what to check beats guessing.</p>
+    <div class="router">
+      <div class="products" role="tablist" aria-label="Legrand products">
+        <button class="prod" role="tab" aria-selected="true" data-prod="ups"><span class="p-name">Keor FLEX UPS</span><span class="p-fam">BORRI · GREY SPACE</span></button>
+        <button class="prod" role="tab" aria-selected="false" data-prod="pdu"><span class="p-name">Raritan PX4 rack PDU</span><span class="p-fam">RARITAN · WHITE SPACE</span></button>
+        <button class="prod" role="tab" aria-selected="false" data-prod="busway"><span class="p-name">Starline track busway</span><span class="p-fam">STARLINE · GREY SPACE</span></button>
+        <button class="prod" role="tab" aria-selected="false" data-prod="rack"><span class="p-name">Minkels Nexpand rack</span><span class="p-fam">MINKELS · WHITE SPACE</span></button>
+        <button class="prod" role="tab" aria-selected="false" data-prod="cool"><span class="p-name">USystems rear-door cooler</span><span class="p-fam">USYSTEMS · WHITE SPACE</span></button>
+        <button class="prod" role="tab" aria-selected="false" data-prod="emerg"><span class="p-name">Galaxy/Axiom emergency luminaire</span><span class="p-fam">LEGRAND AU · EMERGENCY LIGHTING</span></button>
+        <button class="prod" role="tab" aria-selected="false" data-prod="rcbo"><span class="p-name">DX³ RCBO</span><span class="p-fam">LEGRAND AU · POWER DISTRIBUTION</span></button>
+        <button class="prod" role="tab" aria-selected="false" data-prod="led"><span class="p-name">LED globe</span><span class="p-fam">LEGRAND AU · LIGHTING</span></button>
+      </div>
+      <div class="routebox" id="routebox"><!-- filled by JS --></div>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: QUIZ ============ -->
+  <section class="panel" role="tabpanel" id="panel-quiz" hidden>
+    <h2>✅ Route the product — quiz</h2>
+    <p class="subhead">Six scenarios from the interview playbook. Answer, read the reasoning, watch the score. Restart any time.</p>
+    <div class="quiz">
+      <div class="scorebar" id="scorebar">Score: 0 / 0</div>
+      <div class="q-card" id="qcard"><!-- filled by JS --></div>
+      <button class="restart" id="restart" hidden>↺ Restart quiz</button>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: CHEAT SHEET ============ -->
+  <section class="panel" role="tabpanel" id="panel-cheat" hidden>
+    <h2>📚 Cheat sheet</h2>
+    <p class="subhead">Six checkpoints, one master table, and the marks. For the 60 seconds before the interview.</p>
+    <h3 style="margin:18px 0 0;font-size:15px">The six checkpoints</h3>
+    <ol class="checklist">
+      <li><b>In scope?</b> EESS in-scope check (50–1000&nbsp;V&nbsp;AC, household-type) · GEMS product class check · fire-related → ActivFire</li>
+      <li><b>Risk level</b> — <span class="mono">AS/NZS 4417.2</span> → L1 / L2 / L3</li>
+      <li><b>Evidence</b> — ISO&nbsp;17025 test reports to AS/NZS standards; L3 = CoC from an accredited certifier</li>
+      <li><b>Registration</b> — Responsible Supplier (annual, ABN) + equipment registration (L2/L3 mandatory; L3 term tied to CoC expiry)</li>
+      <li><b>Marking</b> — RCM after registration; GEMS energy label where required</li>
+      <li><b>Declare &amp; maintain</b> — SDOC + compliance folder in controlled docs; renewal calendar; check-test failures → NCR/CAPA</li>
+    </ol>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Dimension</th><th>⚡ EESS</th><th>🔌 GEMS/MEPS</th><th>🔥 ActivFire</th></tr></thead>
+        <tbody>
+          <tr><td><b>Regulates</b></td><td>Electrical safety + EMC of low-voltage household-type equipment</td><td>Energy efficiency of appliances/equipment</td><td>Active fire protection products</td></tr>
+          <tr><td><b>Who runs it</b></td><td>State regulators (ERAC)</td><td>GEMS Regulator (DCCEEW, Cth)</td><td>CSIRO Verification Services</td></tr>
+          <tr><td><b>Law / rules</b></td><td>State electrical safety legislation; EESS rules</td><td>GEMS Act 2012 + Determinations</td><td>AF-D001 Scheme Rules + AS standards</td></tr>
+          <tr><td><b>Registration</b></td><td>Mandatory L2/L3 before supply</td><td>Mandatory before supply</td><td>Mandatory CoC before supply</td></tr>
+          <tr><td><b>Register</b></td><td class="mono">EESS Registration Database (national)</td><td class="mono">Energy Rating Product Registration ("E3")</td><td class="mono">ActivFire Register of Fire Protection Equipment</td></tr>
+          <tr><td><b>Mark</b></td><td>RCM</td><td>Energy Rating Label (stars) on labelling classes</td><td>ActivFire certificate (listing), labels per AN-014</td></tr>
+          <tr><td><b>Certifier</b></td><td>Third-party JAS-ANZ certifier (L3 only)</td><td><b>None</b> — regulator direct (self-register)</td><td>CSIRO itself</td></tr>
+          <tr><td><b>Renewal</b></td><td>RS: annual · equipment: 1/2/5 yrs tied to CoC</td><td>~5 years per model; annual unit-sales report by 31 Oct</td><td>Surveillance + FPC audits (new from Jan 2026)</td></tr>
+          <tr><td><b>Post-launch</b></td><td>Market surveillance; NSW dual-track (REAS marks)</td><td>Risk-based check-testing ~60–70 models/yr; Stage 2 at your cost</td><td>Batch sampling; product-change verification</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid g2">
+      <div class="pattern eess"><span class="p-icon">⚡</span><div class="p-body"><b>Certify-then-supply</b> — EESS L3 &amp; ActivFire: an independent body pre-approves you. Certificate before supply.</div></div>
+      <div class="pattern gems"><span class="p-icon">🔌</span><div class="p-body"><b>Declare-then-supply</b> — GEMS: you self-certify with an accredited lab's report; the regulator audits you after, like a tax authority.</div></div>
+    </div>
+    <div class="pattern warn"><span class="p-icon">⚠️</span><div class="p-body"><b>The three things interviewers probe:</b> ① change control is where compliance dies — a cheaper component or a factory move voids the certificate. ② You're answerable to the <b>regulator</b> after launch, not the certifier. ③ Renewals across a large SKU portfolio are a <b>system</b> (master compliance register driving the audit calendar), not a memory.</div></div>
+  </section>
+
+  <footer class="footer">
+    <p>Built as a study companion for the Quality &amp; Product Compliance Manager role — Legrand Australia, Prestons NSW. Content aligned with the EESS/GEMS/ActivFire interview prep notes (compiled 1–2 Sep 2026).</p>
+    <p class="src">Sources: eess.gov.au · energyrating.gov.au · vs.csiro.au/activfire (AF-D001, AN-020) · legrand.com.au (product examples) · AS/NZS 4417.2, 3820, 60335.1, 60598.1 · GEMS LED Lamps Determination 2025</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(s){ return document.querySelector(s); };
+  var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  /* ---------- tabs ---------- */
+  var tabs = $$(".tab");
+  var panels = $$(".panel");
+  function showTab(id){
+    tabs.forEach(function(t){ t.setAttribute("aria-selected", t.getAttribute("data-tab") === id ? "true" : "false"); });
+    panels.forEach(function(p){ p.hidden = (p.id !== "panel-" + id); });
+    try{ localStorage.setItem("compliance-bench-tab", id); }catch(e){}
+  }
+  tabs.forEach(function(t){
+    t.addEventListener("click", function(){ showTab(t.getAttribute("data-tab")); });
+  });
+  try{
+    var saved = localStorage.getItem("compliance-bench-tab");
+    if(saved && document.getElementById("panel-" + saved)) showTab(saved);
+  }catch(e){}
+
+  /* ---------- stage drill-downs ---------- */
+  $$(".stepper").forEach(function(stepper){
+    var stages = stepper.querySelectorAll(".stage");
+    var prefix = stages.length ? stages[0].getAttribute("data-stage").charAt(0) : "e";
+    function select(id){
+      stages.forEach(function(s){ s.setAttribute("aria-selected", s.getAttribute("data-stage") === id ? "true" : "false"); });
+      $$(".stagedetail[id^='stage-']").forEach(function(d){
+        d.hidden = (d.id !== "stage-" + id);
+      });
+    }
+    stages.forEach(function(s){
+      s.addEventListener("click", function(){ select(s.getAttribute("data-stage")); });
+    });
+  });
+
+  /* ---------- product router ---------- */
+  var ROUTES = {
+    ups: {
+      name: "Keor FLEX UPS", fam: "BORRI · GREY SPACE · DATA CENTRE",
+      verdicts: [
+        ["EESS", "check", "scope check required"],
+        ["GEMS/MEPS", "no", "no UPS Determination today"],
+        ["ActivFire", "no", "not fire protection"]
+      ],
+      h: "Professional power equipment — know the boundary",
+      p: "A UPS for a data centre is professional-use equipment, which usually falls outside EESS's household-type scope — but you verify rather than assume, because the use decides it, not the brand. The RCM still matters for EMC (ACMA), and if a GEMS Determination for UPS appears, you're ready.",
+      steps: [
+        "Confirm in-scope status: household-type? If yes → AS/NZS 4417.2 risk level; if no → document the exclusion rationale",
+        "EMC testing to AS/NZS CISPR 32 → ACMA RCM requirements",
+        "Supplier SDOC + compliance folder in the QMS (importer-of-record check)",
+        "Monitor Determinations and standard revisions for scope changes"
+      ]
+    },
+    pdu: {
+      name: "Raritan PX4 rack PDU", fam: "RARITAN · WHITE SPACE · DATA CENTRE",
+      verdicts: [
+        ["EESS", "check", "in-scope check: household-type?"],
+        ["GEMS/MEPS", "no", "no PDU Determination today"],
+        ["ActivFire", "no", "not fire protection"]
+      ],
+      h: "Same spine as the UPS — classification first",
+      p: "Rack PDUs sit in the professional IT world. If a variant is marketed for household/personal use (e.g. a home-office power strip form factor), it flips into EESS scope — possibly Level 2 or 3 as a power board (EPOD). The skill is knowing which question to ask the product manager.",
+      steps: [
+        "In-scope check per the EESS in-scope equipment definitions (use + voltage)",
+        "If in scope: classify risk level — EPODs are Level 3; CoC before registration",
+        "If out of scope: EMC evidence + supplier SDOC still required",
+        "Monitor marketing claims — a 'home' SKU changes the compliance pathway"
+      ]
+    },
+    busway: {
+      name: "Starline track busway", fam: "STARLINE · GREY SPACE · DATA CENTRE",
+      verdicts: [
+        ["EESS", "no", "fixed installation"],
+        ["GEMS/MEPS", "no", "not a regulated class"],
+        ["ActivFire", "no", "not fire protection"]
+      ],
+      h: "Fixed installation — the wiring rules world",
+      p: "Busway is part of the fixed electrical installation, not plug-in equipment: it's governed by AS/NZS 3000 (Wiring Rules) and installation compliance, not EESS registration. Active components (e.g. Starline M70 metering modules) may still carry EMC obligations.",
+      steps: [
+        "Confirm fixed-installation classification (AS/NZS 3000 world, not EESS)",
+        "EMC evidence for active/metering components (ACMA RCM)",
+        "Supplier SDOC for the imported product; Australian deviations check",
+        "Coordinate with installers on installation compliance documentation"
+      ]
+    },
+    rack: {
+      name: "Minkels Nexpand rack", fam: "MINKELS · WHITE SPACE · DATA CENTRE",
+      verdicts: [
+        ["EESS", "no", "passive structure"],
+        ["GEMS/MEPS", "no", "not a regulated class"],
+        ["ActivFire", "no", "not fire protection"]
+      ],
+      h: "Passive equipment — documentation still matters",
+      p: "A rack is a passive structure: no electrical safety scheme, no energy determination, no fire-protection certification. But materials documentation does matter — fire-rating and NCC considerations for the building, plus the supplier quality basics: specs, traceability, incoming inspection.",
+      steps: [
+        "Confirm passive classification; document the rationale in the compliance folder",
+        "Collect material/fire-rating documentation for NCC/Building Code coordination",
+        "Supplier quality: incoming inspection, spec conformity, traceability",
+        "No registration — but keep the exclusion on file for auditors"
+      ]
+    },
+    cool: {
+      name: "USystems rear-door cooler", fam: "USYSTEMS · WHITE SPACE · DATA CENTRE",
+      verdicts: [
+        ["EESS", "check", "professional HVAC — verify"],
+        ["GEMS/MEPS", "check", "check refrigeration Determinations"],
+        ["ActivFire", "no", "not fire protection"]
+      ],
+      h: "The double-check product",
+      p: "Cooling equipment is exactly where scope checks matter: professional HVAC is usually outside EESS household-type scope, but GEMS regulates commercial refrigeration classes (e.g. refrigerated display cabinets) — so you confirm whether a Determination captures your model. 'Check, don't guess' is the professional answer.",
+      steps: [
+        "EESS in-scope check: household-type? (professional HVAC — likely out, verify)",
+        "GEMS class check against refrigeration Determinations",
+        "EMC evidence (ACMA) + refrigerant/GWP documentation",
+        "Supplier SDOC; monitor Determination scope changes"
+      ]
+    },
+    emerg: {
+      name: "Galaxy/Axiom emergency luminaire & exit sign", fam: "LEGRAND AU · EMERGENCY LIGHTING",
+      verdicts: [
+        ["EESS", "yes", "Level 2 — luminaire"],
+        ["GEMS/MEPS", "no", "not a regulated class (lighting check)"],
+        ["ActivFire", "yes", "AS 2293.3 emergency lighting"]
+      ],
+      h: "A two-scheme product — the perfect interview example",
+      p: "An emergency luminaire wears two hats: it's a luminaire (EESS in-scope, Level 2 — test to AS/NZS 60598.1, register, RCM) and it's emergency lighting (ActivFire certification to AS 2293.3). Two schemes, two registrations, one SDOC tying the evidence chain together.",
+      steps: [
+        "EESS: classify Level 2 (luminaire) → test to AS/NZS 60598.1 → register → RCM",
+        "ActivFire: Verification Plan → witnessed tests to AS 2293.3 → CoC → register listing",
+        "NSW declared-article check: dual-track approval if applicable",
+        "One compliance folder, two certificates — SDOC cross-references both"
+      ]
+    },
+    rcbo: {
+      name: "DX³ RCBO", fam: "LEGRAND AU · POWER DISTRIBUTION",
+      verdicts: [
+        ["EESS", "yes", "in-scope + NSW declared class"],
+        ["GEMS/MEPS", "no", "not a regulated class"],
+        ["ActivFire", "no", "not fire protection"]
+      ],
+      h: "The NSW dual-track product",
+      p: "A safety switch is in NSW's declared-article classes — the classic case for the dual track: one test report → EESS registration (national RCM) + NSW Certificate of Approval (REAS mark, e.g. SAA-xxxxxx-EA) since the Nov 2020 change. Dropping this in an interview at Prestons = instant credibility.",
+      steps: [
+        "EESS risk level via AS/NZS 4417.2 (likely Level 2/3 — RCBOs sit high)",
+        "One NATA test report serves both applications",
+        "National: EESS registration → RCM",
+        "NSW: Form EEA1 → Fair Trading or REAS certifier → CoA + REAS mark"
+      ]
+    },
+    led: {
+      name: "LED globe", fam: "LEGRAND AU · LIGHTING",
+      verdicts: [
+        ["EESS", "yes", "Level 1 — self-declared"],
+        ["GEMS/MEPS", "yes", "LED Lamps Determination 2025"],
+        ["ActivFire", "no", "not fire protection"]
+      ],
+      h: "Level 1 + GEMS — the energy-label story",
+      p: "An LED globe is EESS Level 1: no registration, but the RCM still applies. And it's captured by the LED Lamps Determination 2025 — MEPS in force from 3 Mar 2026 — so it needs registration on the E3 register, a star label matching registered data, and the luminous-efficacy test report on file. Level 1 does not mean 'do nothing'.",
+      steps: [
+        "EESS: Level 1 (self-declared) — RCM mark still required",
+        "GEMS: test luminous efficacy + 3,600-hr endurance → register on E3 → star label",
+        "Annual compliance report (units sold) by 31 October",
+        "Check-test readiness: production must match the registered claim"
+      ]
+    }
+  };
+  var prods = $$(".prod");
+  var routebox = $("#routebox");
+  function renderRoute(key){
+    var r = ROUTES[key];
+    var pills = r.verdicts.map(function(v){
+      return '<span class="vpill ' + v[1] + '">' + v[0] + " · " + v[2] + "</span>";
+    }).join("");
+    var steps = r.steps.map(function(s){ return "<li>" + s + "</li>"; }).join("");
+    routebox.innerHTML =
+      "<h4>" + r.name + "</h4>" +
+      '<div class="r-fam">' + r.fam + "</div>" +
+      "<h5>Framework verdict</h5><div class=\"verdicts\">" + pills + "</div>" +
+      "<h5>The compliance story</h5><p><b>" + r.h + ".</b> " + r.p + "</p>" +
+      "<h5>Path</h5><ol class=\"steps\">" + steps + "</ol>";
+  }
+  prods.forEach(function(p){
+    p.addEventListener("click", function(){
+      prods.forEach(function(x){ x.setAttribute("aria-selected", "false"); });
+      p.setAttribute("aria-selected", "true");
+      renderRoute(p.getAttribute("data-prod"));
+    });
+  });
+  renderRoute("ups");
+
+  /* ---------- quiz ---------- */
+  var QUIZ = [
+    {
+      q: "A new power board (EPOD) is coming from the factory. What's the EESS path?",
+      opts: [
+        "Level 1 — no registration needed, just RCM",
+        "Level 2 — register, keep a compliance folder",
+        "Level 3 — Certificate of Conformity BEFORE registration, then register",
+        "GEMS registration only"
+      ],
+      a: 2,
+      why: "EPODs are high-risk (Level 3): the CoC from an accredited certifier comes BEFORE registration, and the registration term (1/2/5 yrs) can't outlast the CoC. The order is the whole point."
+    },
+    {
+      q: "Your LED globe range: which schemes bite?",
+      opts: [
+        "EESS Level 1 + GEMS (LED Lamps Determination 2025)",
+        "EESS Level 3 only",
+        "ActivFire only",
+        "Nothing — it's just a lamp"
+      ],
+      a: 0,
+      why: "LED globes are EESS Level 1 (self-declared, RCM still applies) AND in the GEMS LED Lamps class — MEPS in force from 3 Mar 2026, so E3 registration plus a star label matching registered data. Level 1 ≠ do nothing."
+    },
+    {
+      q: "A Galaxy emergency exit sign. What does compliance look like?",
+      opts: [
+        "ActivFire only — emergency lighting",
+        "EESS Level 2 (luminaire) + ActivFire (AS 2293.3)",
+        "EESS Level 3 + GEMS",
+        "No scheme applies to emergency lighting"
+      ],
+      a: 1,
+      why: "Two hats: it's a luminaire (EESS in-scope Level 2 — AS/NZS 60598.1) and emergency lighting (ActivFire to AS 2293.3). Two schemes, two registrations, one SDOC tying the evidence chain."
+    },
+    {
+      q: "The Raritan rack PDU ships to an Australian data centre. What's your first move?",
+      opts: [
+        "Register it on the EESS database immediately",
+        "Scope check: is it household-type equipment?",
+        "Book an ActivFire verification plan",
+        "Apply the RCM and ship"
+      ],
+      a: 1,
+      why: "Professional IT equipment usually sits outside EESS's household-type scope — but the use decides it, not the brand. Verify in-scope status first (a 'home' SKU flips the pathway), and keep the EMC RCM obligations in view regardless."
+    },
+    {
+      q: "The GEMS Regulator check-tests your registered model and it fails Stage 1. Your first three moves?",
+      opts: [
+        "Ignore it — check-tests are advisory",
+        "Quarantine stock → root cause → CAPA, and reassess warranty exposure",
+        "Re-register the same test report with a different lab",
+        "Delist the whole brand immediately"
+      ],
+      a: 1,
+      why: "A failed check-test means you may already be supplying non-compliant product: quarantine, RCA, CAPA, re-test before re-applying — and link it to warranty/recall exposure. Sibling models sharing the test report are also at risk."
+    },
+    {
+      q: "Level 3 equipment: how long can the registration last?",
+      opts: [
+        "Forever, once the CoC is issued",
+        "1, 2 or 5 years — and never beyond the CoC expiry",
+        "Annual, like the Responsible Supplier registration",
+        "Until the GEMS Regulator check-tests it"
+      ],
+      a: 1,
+      why: "L3 registration terms are 1/2/5 years and cannot outlast the CoC expiry — that coupling drives the renewal calendar. (The Responsible Supplier registration is the annual one.)"
+    }
+  ];
+  var qi = 0, score = 0;
+  var qcard = $("#qcard"), scorebar = $("#scorebar"), restartBtn = $("#restart");
+  function renderQ(){
+    if(qi >= QUIZ.length){
+      var msg = score === QUIZ.length
+        ? "Perfect — you're ready to talk EESS/GEMS/ActivFire with Paul."
+        : (score >= 4 ? "Solid. Revisit the missed ones in the scheme tabs." : "Run the scheme tabs again, then retry.");
+      qcard.innerHTML = "<h3>" + msg + "</h3><p style='font-size:14px;color:var(--ink-2)'>Final score: <b>" + score + " / " + QUIZ.length + "</b></p>";
+      restartBtn.hidden = false;
+      scorebar.textContent = "Score: " + score + " / " + QUIZ.length;
+      return;
+    }
+    var item = QUIZ[qi];
+    var html = '<div class="q-n">Question ' + (qi + 1) + " of " + QUIZ.length + "</div><h3>" + item.q + "</h3><div class=\"opts\">";
+    item.opts.forEach(function(o, i){
+      html += '<button class="opt" data-i="' + i + '">' + o + "</button>";
+    });
+    html += "</div><div class=\"feedback\" id=\"fb\" hidden></div>";
+    qcard.innerHTML = html;
+    scorebar.textContent = "Score: " + score + " / " + qi;
+    restartBtn.hidden = true;
+    qcard.querySelectorAll(".opt").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var i = parseInt(btn.getAttribute("data-i"), 10);
+        var fb = $("#fb");
+        qcard.querySelectorAll(".opt").forEach(function(b){
+          b.setAttribute("aria-disabled", "true");
+          if(parseInt(b.getAttribute("data-i"), 10) === item.a) b.classList.add("right");
+        });
+        if(i === item.a){ score++; }
+        else { btn.classList.add("wrong"); }
+        fb.hidden = false;
+        fb.innerHTML = "<b>" + (i === item.a ? "Correct. " : "Not quite. ") + "</b>" + item.why +
+          ' <button class="opt" style="margin-top:10px;display:inline-block" id="next">Next →</button>';
+        $("#next").addEventListener("click", function(){ qi++; renderQ(); });
+      });
+    });
+  }
+  restartBtn.addEventListener("click", function(){ qi = 0; score = 0; renderQ(); });
+  renderQ();
+})();
+</script>
