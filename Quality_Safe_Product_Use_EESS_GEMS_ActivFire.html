@@ -223,6 +223,24 @@ a{color:var(--brand)}
   font-family:var(--font-m);font-size:10.5px;display:flex;align-items:center;justify-content:center;
 }
 
+/* ============ REAL MARKS ============ */
+.labelrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:18px 0}
+.labelcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+.labelcard h3{margin:0 0 10px;font-size:15.5px;font-weight:700}
+.labelimg{background:#fff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px;display:flex;align-items:center;justify-content:center;min-height:150px}
+.labelimg img{max-width:100%;max-height:200px;object-fit:contain}
+.labelcard ul{margin:12px 0 0;padding-left:18px}
+.labelcard li{font-size:13px;color:var(--ink-2);margin-bottom:5px}
+.labelcard .src{display:block;font-family:var(--font-m);font-size:11px;color:var(--ink-3);margin-top:12px;word-break:break-all}
+.labelcard .src a{color:var(--ink-3)}
+
+/* ============ ACRONYMS ============ */
+.acrogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin:16px 0}
+.acro{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:11px 14px}
+.acro .term{font-family:var(--font-m);font-weight:600;font-size:13px;color:var(--brand)}
+.acro .def{font-size:13px;color:var(--ink-2);margin-top:2px;line-height:1.45}
+.acrogroup{margin:22px 0 4px;font-family:var(--font-m);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+
 /* ============ QUIZ ============ */
 .quiz{max-width:760px;margin-top:6px}
 .q-card{
@@ -320,6 +338,8 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <button class="tab" role="tab" aria-selected="false" data-tab="fire"><span class="em">🔥</span>ActivFire</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="router"><span class="em">🗄️</span>Data Centre Router</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="quiz"><span class="em">✅</span>Quiz</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="marks"><span class="em">🏷️</span>Real Marks</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="acro"><span class="em">🔤</span>Acronyms</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="cheat"><span class="em">📚</span>Cheat Sheet</button>
     </div>
   </div>
@@ -575,6 +595,115 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <div class="scorebar" id="scorebar">Score: 0 / 0</div>
       <div class="q-card" id="qcard"><!-- filled by JS --></div>
       <button class="restart" id="restart" hidden>↺ Restart quiz</button>
+    </div>
+  </section>
+
+  <!-- ============ PANEL: REAL MARKS ============ -->
+  <section class="panel" role="tabpanel" id="panel-marks" hidden>
+    <h2>🏷️ Real Marks — what they actually look like</h2>
+    <p class="subhead">The three marks that end up on the product or packaging, from official sources. Learn the look, the placement rules and the one-line purpose of each — interviewers describe marks and expect recognition.</p>
+    <div class="labelrow">
+      <div class="labelcard">
+        <h3>RCM — Regulatory Compliance Mark</h3>
+        <div class="labelimg"><img src="images/rcm-mark.png" alt="RCM mark: triangle with tick, as published by EESS"></div>
+        <ul>
+          <li>Triangle + tick — applied <b>only after registration</b></li>
+          <li>Placement: external surface, near model identification, durable &amp; legible; min <b>3 mm</b> high (<span class="mono">AS/NZS 4417.1</span>)</li>
+          <li>Covers electrical safety (EESS) + EMC/telecoms (ACMA) in one mark</li>
+          <li>Mandatory from <b>1 Mar 2016</b> — replaced the old C-Tick / A-Tick</li>
+          <li>If not practical on the product: packaging/documentation, or electronic display</li>
+        </ul>
+        <span class="src">Source: <a href="https://www.eess.gov.au/rcm/marking-of-electrical-equipment/">eess.gov.au — Marking of Electrical Equipment</a> (study reference; ACMA/EESS trademark)</span>
+      </div>
+      <div class="labelcard">
+        <h3>Energy Rating Label — GEMS</h3>
+        <div class="labelimg"><img src="images/energy-rating-label.png" alt="Australian energy rating label: red arc with yellow star band"></div>
+        <ul>
+          <li>Stars = efficiency — <b>more stars, less energy</b>; label must match registered data exactly</li>
+          <li>Shows energy consumption (kWh/year) + star rating (1–10)</li>
+          <li>Only on <b>labelling classes</b> — MEPS-only products (motors) carry no label</li>
+          <li>Newer formats: zoned label for air conditioners (hot/average/cold zones), 1–10 stars for pool pumps, 7–10 "super-efficient" coronet</li>
+          <li>Commonwealth trademark — free to display in retail, permission needed elsewhere</li>
+        </ul>
+        <span class="src">Source: <a href="https://www.energyrating.gov.au/industry-information/understand-requirements/labelling/sample-labels-and-icons">energyrating.gov.au — Sample Labels and Icons</a></span>
+      </div>
+      <div class="labelcard">
+        <h3>ActivFire mark — CSIRO</h3>
+        <div class="labelimg"><img src="images/activfire-logo.png" alt="ActivFire logo: flame and wordmark"></div>
+        <ul>
+          <li>Certificate &amp; register listing <b>is</b> the mark — there's no RCM equivalent for fire protection</li>
+          <li>Labels &amp; manuals follow Advisory Note <b>AN-014</b> rules</li>
+          <li>Certificates issued <b>per agent/distributor</b> by CSIRO Verification Services</li>
+          <li>Verified against AS standards + CSIRO Technical Specifications under <span class="mono">AF-D001</span> Rules</li>
+          <li>Look for the listing on the public <b>ActivFire Register</b></li>
+        </ul>
+        <span class="src">Source: <a href="https://vs.csiro.au/activfire/">vs.csiro.au/activfire</a> (study reference; CSIRO trademark)</span>
+      </div>
+    </div>
+    <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>Recognition drill:</b> triangle+tick = national RCM (safety+EMC) · red-arc star label = GEMS energy · flame wordmark = ActivFire fire certification. If the interviewer asks "where does each mark go?" — RCM: on the product near the model number; energy label: on the product (and its packaging for online sales); ActivFire: on the product label per AN-014.</div></div>
+  </section>
+
+  <!-- ============ PANEL: ACRONYMS ============ -->
+  <section class="panel" role="tabpanel" id="panel-acro" hidden>
+    <h2>🔤 Acronyms — the full alphabet of the job</h2>
+    <p class="subhead">Every acronym used across this trainer and the interview prep notes. Bonus: TÜV pronunciation, because saying it wrong in a room of engineers is avoidable.</p>
+    <div class="acrogroup">Marks &amp; approvals</div>
+    <div class="acrogrid">
+      <div class="acro"><span class="term">RCM</span><div class="def">Regulatory Compliance Mark — national mark (triangle + tick), applied after EESS registration; covers electrical safety + EMC (ACMA).</div></div>
+      <div class="acro"><span class="term">REAS</span><div class="def">Recognised External Approval Scheme — NSW Fair Trading's program recognising external certifiers for declared articles.</div></div>
+      <div class="acro"><span class="term">RECS</span><div class="def">Recognised External Certification Scheme — the national EESS equivalent: certifiers recognised to issue Level 3 certificates.</div></div>
+      <div class="acro"><span class="term">CoC</span><div class="def">Certificate of Conformity — issued by a certifier (EESS L3, JAS-ANZ bodies) or CSIRO (ActivFire).</div></div>
+      <div class="acro"><span class="term">CoA</span><div class="def">Certificate of Approval — the NSW declared-article approval document (Fair Trading or REAS certifier).</div></div>
+      <div class="acro"><span class="term">EEA1</span><div class="def">The NSW application form for electrical article approval (form name, not an acronym).</div></div>
+      <div class="acro"><span class="term">ABC-xxxxxx-EA</span><div class="def">NSW REAS approval mark format — certifier prefix + number + "EA" (e.g. SAA-2024-001-EA).</div></div>
+      <div class="acro"><span class="term">NSWxxxxx</span><div class="def">NSW Fair Trading's own approval number format when FT approves directly.</div></div>
+    </div>
+    <div class="acrogroup">Schemes &amp; regulators</div>
+    <div class="acrogrid">
+      <div class="acro"><span class="term">EESS</span><div class="def">Electrical Equipment Safety System — national AU/NZ electrical safety framework.</div></div>
+      <div class="acro"><span class="term">GEMS</span><div class="def">Greenhouse and Energy Minimum Standards — national energy-efficiency law (GEMS Act 2012).</div></div>
+      <div class="acro"><span class="term">MEPS</span><div class="def">Minimum Energy Performance Standards — the performance floor per product class under a GEMS Determination.</div></div>
+      <div class="acro"><span class="term">E3</span><div class="def">The Energy Rating Product Registration system — "E3" database (reg.energyrating.gov.au).</div></div>
+      <div class="acro"><span class="term">ERAC</span><div class="def">Electrical Regulatory Authorities Council — the state/territory + NZ regulators running EESS.</div></div>
+      <div class="acro"><span class="term">ACMA</span><div class="def">Australian Communications and Media Authority — EMC/radiocommunications obligations behind the RCM.</div></div>
+      <div class="acro"><span class="term">DCCEEW</span><div class="def">Department of Climate Change, Energy, the Environment and Water — home of the GEMS Regulator.</div></div>
+      <div class="acro"><span class="term">CSIRO</span><div class="def">Commonwealth Scientific and Industrial Research Organisation — runs the ActivFire scheme via Verification Services.</div></div>
+      <div class="acro"><span class="term">AN / TS</span><div class="def">Advisory Note / Technical Specification — ActivFire scheme documents (e.g. AN-020 changes, TS-007 smoke alarms).</div></div>
+      <div class="acro"><span class="term">FPC</span><div class="def">Factory Production Control — factory audits under ActivFire (new from Jan 2026, AN-020).</div></div>
+    </div>
+    <div class="acrogroup">Testing &amp; certification world</div>
+    <div class="acrogrid">
+      <div class="acro"><span class="term">NATA</span><div class="def">National Association of Testing Authorities — Australian laboratory accreditation body.</div></div>
+      <div class="acro"><span class="term">ISO 17025</span><div class="def">The standard for testing/calibration laboratory competence — the lab accreditation to look for.</div></div>
+      <div class="acro"><span class="term">ILAC / MRA</span><div class="def">International Laboratory Accreditation Cooperation / Mutual Recognition Arrangement — cross-border recognition of lab reports.</div></div>
+      <div class="acro"><span class="term">CB / CBTL</span><div class="def">IECEE CB Scheme / CB Testing Laboratory — international scheme so one test report serves many countries.</div></div>
+      <div class="acro"><span class="term">IECEE</span><div class="def">IEC System of Conformity Assessment Schemes for Electrotechnical Equipment and Components.</div></div>
+      <div class="acro"><span class="term">JAS-ANZ</span><div class="def">Joint Accreditation System of Australia and New Zealand — accredits the EESS Level 3 certifiers.</div></div>
+      <div class="acro"><span class="term">SAA</span><div class="def">SAA Approvals — Australia's largest private electrical certifier (JAS-ANZ accredited, HQ Brisbane).</div></div>
+      <div class="acro"><span class="term">TÜV</span><div class="def">Technischer Überwachungsverein (Technical Inspection Association) — German certifier. Say <b>"toof"</b>; TÜV Rheinland = "toof rine-land"; TÜV SÜD = "toof zood".</div></div>
+      <div class="acro"><span class="term">UL</span><div class="def">UL International — global certification body, recognised for EESS Level 3 work.</div></div>
+    </div>
+    <div class="acrogroup">The quality system</div>
+    <div class="acrogrid">
+      <div class="acro"><span class="term">QMS</span><div class="def">Quality Management System — ISO 9001 is the backbone; document control keeps the evidence chain audit-proof.</div></div>
+      <div class="acro"><span class="term">SDOC</span><div class="def">Supplier Declaration of Compliance/Conformity — the declaration tying test reports, CoC and registration to the product.</div></div>
+      <div class="acro"><span class="term">NCR</span><div class="def">Non-Conformance Report — raised on deviations; feeds corrective action.</div></div>
+      <div class="acro"><span class="term">CAPA</span><div class="def">Corrective and Preventive Action — the closed loop from root cause to permanent fix.</div></div>
+      <div class="acro"><span class="term">ABN</span><div class="def">Australian Business Number — the Responsible Supplier / GEMS registrant must be the ABN entity that manufactures or imports.</div></div>
+      <div class="acro"><span class="term">SOP</span><div class="def">Standard Operating Procedure — the written "how" behind every controlled process.</div></div>
+    </div>
+    <div class="acrogroup">Product &amp; energy terms</div>
+    <div class="acrogrid">
+      <div class="acro"><span class="term">EPOD</span><div class="def">Electrical Portable Outlet Device — power boards; EESS Level 3.</div></div>
+      <div class="acro"><span class="term">FDCIE</span><div class="def">Fire Detection Control &amp; Indicating Equipment — fire alarm panels (ActivFire, AS 7240).</div></div>
+      <div class="acro"><span class="term">AEC</span><div class="def">Annual Energy Consumption — the kWh/year figure on the energy label.</div></div>
+      <div class="acro"><span class="term">COP / EER</span><div class="def">Coefficient of Performance / Energy Efficiency Ratio — efficiency metrics for ACs &amp; heat pumps.</div></div>
+      <div class="acro"><span class="term">EMC</span><div class="def">Electromagnetic Compatibility — emissions/immunity; part of the RCM's scope via ACMA.</div></div>
+      <div class="acro"><span class="term">IP rating</span><div class="def">Ingress Protection (AS 60529) — dust/water resistance, e.g. IP68 busbar, RCP IP68.</div></div>
+      <div class="acro"><span class="term">UPS / PDU / KVM</span><div class="def">Uninterruptible Power Supply / Power Distribution Unit / Keyboard-Video-Mouse — the data-centre power &amp; IT trio.</div></div>
+      <div class="acro"><span class="term">GWP / NCC</span><div class="def">Global Warming Potential (refrigerants) / National Construction Code (fire-rating &amp; building compliance).</div></div>
+      <div class="acro"><span class="term">OCP</span><div class="def">Open Compute Project — the open-source data-centre hardware standard behind "OCP racks" (Minkels).</div></div>
+      <div class="acro"><span class="term">AS/NZS</span><div class="def">Australian/New Zealand Standard — the joint standards prefix (e.g. AS/NZS 4417.2, AS/NZS 60335.1).</div></div>
     </div>
   </section>
 
