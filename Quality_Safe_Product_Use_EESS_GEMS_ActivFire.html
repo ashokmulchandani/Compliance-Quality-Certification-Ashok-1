@@ -341,6 +341,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <button class="tab" role="tab" aria-selected="false" data-tab="marks"><span class="em">🏷️</span>Real Marks</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="acro"><span class="em">🔤</span>Acronyms</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="iso"><span class="em">🧪</span>ISO Standards</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="teststd"><span class="em">🔬</span>Test Standards</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="cheat"><span class="em">📚</span>Cheat Sheet</button>
     </div>
   </div>
@@ -778,6 +779,87 @@ td.mono{font-family:var(--font-m);font-size:12px}
       </table>
     </div>
     <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>Interview line that ties it together:</b> "ISO 9001 is the house we live in, ISO/IEC 17025 is the standard of the labs whose evidence we trust, and ISO 19011 is the discipline of how we audit both. The compliance folder is only as strong as the weakest certificate in it."</div></div>
+  </section>
+
+  <!-- ============ PANEL: TEST STANDARDS ============ -->
+  <section class="panel" role="tabpanel" id="panel-teststd" hidden>
+    <h2>🔬 Product testing standards — AS/NZS, mapped to Legrand</h2>
+    <p class="subhead">The joint Australian/New Zealand product standards the labs test against. Each product class has a <b>Part 1</b> (general umbrella) plus <b>Part 2</b> rules for specific product types — a product claims compliance to both (e.g. <span class="mono">AS/NZS 60335.1 + 60335.2.80</span>). EMC emissions (<span class="mono">CISPR 32</span>) applies <b>alongside</b> the safety standard for anything with electronics.</p>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Standard</th><th>What it sets (short description)</th><th>Legrand products it applies to</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="mono"><b>AS/NZS 60335.1</b></td>
+            <td>Joint AU/NZ standard setting safety requirements for <b>household and similar electrical appliances</b> (Part 1 — general; Part 2s add particular rules per appliance type).</td>
+            <td>Legrand manufactures several items that must legally comply with specific Part 2 rules:
+              <ul style="margin:6px 0 0;padding-left:16px">
+                <li style="font-size:12.5px;margin-bottom:4px"><b>Exhaust &amp; ceiling fans</b> — <span class="mono">AS/NZS 60335.2.80</span>: HPM ceiling fans, wall exhaust fans, inline bathroom fan kits <a href="https://assets.legrand.com/pim/Certif/LGIXRFUOXJ.PDF">[cert]</a> <a href="https://assets.legrand.com/pim/Certif/LGHLJURNQW.PDF">[cert]</a> <a href="https://assets.legrand.com/pim/Certif/LGLWPTWVHE.PDF">[cert]</a></li>
+                <li style="font-size:12.5px;margin-bottom:4px"><b>Bathroom heaters</b> — <span class="mono">AS/NZS 60335.2.30</span>: HPM "Instant Heat" 3-in-1 units using heat lamps <a href="https://assets.legrand.com/pim/Certif/LGYNBFZVWP.PDF">[cert]</a></li>
+                <li style="font-size:12.5px;margin-bottom:4px"><b>Outdoor bug zappers</b> — Legrand Electrozap Insect Killer: household safety umbrella incl. moisture/outdoor protection</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS 60598.1</b></td>
+            <td>Safety requirements for <b>luminaires</b> (Part 1 — general); Part 2.22 covers <b>emergency luminaires</b>.</td>
+            <td>
+              <ul style="margin:0;padding-left:16px">
+                <li style="font-size:12.5px;margin-bottom:4px"><b>Galaxy/Axiom emergency luminaires &amp; exit signs</b> — 60598.1 + <span class="mono">60598.2.22</span> (emergency) + ActivFire AS 2293.3</li>
+                <li style="font-size:12.5px;margin-bottom:4px"><b>Residential lighting</b> — INSPYRA, Excel Life, LED globes</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS 61558.1</b></td>
+            <td>Safety of <b>power transformers, power supplies, reactors</b> and similar products.</td>
+            <td>
+              <ul style="margin:0;padding-left:16px">
+                <li style="font-size:12.5px;margin-bottom:4px"><b>Bell/chime transformers</b> for door chimes</li>
+                <li style="font-size:12.5px;margin-bottom:4px"><b>Smart-home power supplies</b> — Netatmo-connected devices (Living Now, Arteor) and LED drivers/controllers</li>
+                <li style="font-size:12.5px"><b>Note:</b> battery chargers follow <span class="mono">60335.2.29</span> — EESS Level 3 territory</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS 62368.1</b></td>
+            <td>Hazard-based safety for <b>audio/video, information &amp; communication technology</b> equipment — replaced the old 60065/60950 pair.</td>
+            <td>
+              <ul style="margin:0;padding-left:16px">
+                <li style="font-size:12.5px;margin-bottom:4px"><b>Raritan rack PDUs &amp; KVM switches</b> — the IT equipment of the data-centre range</li>
+                <li style="font-size:12.5px"><b>Smart hubs &amp; gateways</b> — Living Now with Netatmo, connected-home controllers</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS 3112</b></td>
+            <td>Approval &amp; test specification for <b>plugs and socket outlets</b> — the wiring-device standard.</td>
+            <td>
+              <ul style="margin:0;padding-left:16px">
+                <li style="font-size:12.5px;margin-bottom:4px"><b>HPM plug bases, socket outlets, powerboards &amp; extension leads</b></li>
+                <li style="font-size:12.5px"><b>Arteor / Excel wall plates &amp; mechanisms</b> — classic EESS Level 3 + NSW declared-article territory</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS CISPR 32</b></td>
+            <td><b>EMC emissions</b> for multimedia equipment — the EMC half of the RCM, tested alongside the safety standard.</td>
+            <td>Applies to <b>every active product with electronics</b>: rack PDUs, smart devices, LED drivers, UPS, dimmers, fan controls — safety test + EMC test = one RCM.</td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS 62040</b></td>
+            <td>Safety requirements for <b>uninterruptible power systems (UPS)</b>.</td>
+            <td><b>Keor FLEX / Keor range (Borri)</b> — the data-centre grey-space launch product.</td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS 3000</b></td>
+            <td>The <b>Wiring Rules</b> — electrical installations, for fixed wiring rather than plug-in equipment.</td>
+            <td><b>Starline track busway, Cablofil cable tray, DX³ distribution boards</b> — the fixed-installation world (not EESS registration, but installation compliance).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>Interview line:</b> "One product, two questions — which <b>Part 2</b> of the safety standard applies, and what's the <b>EMC</b> pathway. A fan is 60335.1 + 60335.2.80; a PDU is 62368.1 + CISPR 32. Classify first, then test."</div></div>
   </section>
 
   <!-- ============ PANEL: CHEAT SHEET ============ -->
