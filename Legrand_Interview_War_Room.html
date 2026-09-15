@@ -196,6 +196,18 @@
   .themeToggle { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: all 0.15s; }
   .themeToggle:hover { border-color: var(--accent); }
 
+  /* PREDECESSOR INTEL */
+  .cmp { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 16px 0; }
+  .cmp th, .cmp td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  .cmp th { color: var(--accent); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; background: var(--surface2); }
+  .cmp td { color: var(--text2); line-height: 1.55; }
+  .cmp td b { color: var(--text); }
+  .cmp tr:last-child td { border-bottom: none; }
+  .win { color: var(--green); font-weight: 600; }
+  .pro-asked { border-left: 3px solid var(--accent); padding-left: 10px; margin: 10px 0; font-size: 0.85rem; color: var(--text2); }
+  .pro-asked b { color: var(--text); }
+  .pro-asked .why { font-size: 0.78rem; color: var(--accent); }
+
   @media (max-width: 600px) {
     header { padding: 12px; }
     header h1 { font-size: 1rem; }
@@ -215,6 +227,7 @@
     <button class="active" data-panel="flashcards">🎴 Flashcards</button>
     <button data-panel="company">🏢 Company Intel</button>
     <button data-panel="interviewers">👥 Interviewers</button>
+    <button data-panel="predecessor">🕵️ Predecessor Intel</button>
     <button data-panel="practice">🎯 Practice Mode</button>
     <button data-panel="askthem">❓ Questions to Ask</button>
   </nav>
@@ -332,6 +345,82 @@
           <li>How do R&amp;D and manufacturing collaborate day to day?</li>
         </ul>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PREDECESSOR INTEL ==================== -->
+<div id="predecessor" class="panel">
+  <p class="panel-intro">The person who previously held the role you're applying for. Her public profile reveals what the job <b>actually involves day to day</b> — and where your profile outflanks it. Golden rule: <b>never criticise the person you're replacing</b>; frame everything as building on what exists.</p>
+
+  <div class="gap-grid">
+    <div class="gap-card strength">
+      <h3>🕵️ Who held the role</h3>
+      <p><b>Reshma K.</b> — Product Compliance &amp; Quality Manager at Legrand Australia from Mar 2025 (1 yr 7 mos in role).<br><br>
+      Before Legrand: <b>Schneider Electric for ~12 years</b> — Pacific Zone Logistics Quality Manager (2019–2025), Lead Quality Auditor | Lean Specialist (2017–2019).<br><br>
+      Credentials: <b>Certified Lead Auditor ISO 9001:2015</b> (Sai Global, 2017), Six Sigma Green Belt, B.Com Accounting (University of Mumbai). Tooling: <b>Promapp</b> process/QMS platform. Headline skills: critical thinking, team management, change management.</p>
+    </div>
+    <div class="gap-card major">
+      <h3>📋 What her history reveals the job really involves</h3>
+      <p>Her Schneider bullets map almost 1:1 to the Legrand role's likely duties:
+        • running the <b>audit program</b> to obtain &amp; maintain <b>third-party accreditations (ISO 9001)</b>
+        • end-to-end <b>NCR lifecycle</b> in a process platform (Promapp): log → notify owners → chase responsiveness → CAPA → monitor
+        • writing procedures "clear, simple and concise" so they're actually followed
+        • preparing <b>management-system documents for tenders</b>
+        • promoting Opportunities for Improvement across the org.<br><br>
+      Note what's absent: no visible <b>EESS / GEMS / ActivFire</b> work, no electrical-engineering background, no manufacturing-side depth — her core is QMS &amp; audit on the logistics/distribution side.</p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--heading);font-size:0.95rem;margin:20px 0 10px;">❓ Likely questions, reverse-engineered from her role scope</h3>
+  <div class="cheat-grid">
+    <div class="cheat-box">
+      <div class="pro-asked"><b>1. "Walk me through your audit program — from planning to dispatch to close-out."</b><div class="why">Why: audit-program management was her core job at both Schneider and Legrand.</div></div>
+      <div class="pro-asked"><b>2. "A nonconformity is logged. Walk me from logging to closure."</b><div class="why">Why: her NCR flow in Promapp — log, notify, follow responsiveness, CAPA, monitor — is the house style.</div></div>
+      <div class="pro-asked"><b>3. "How do you keep procedures clear and simple without losing audit rigour?"</b><div class="why">Why: "clear, simple and concise" documentation is literally her headline.</div></div>
+    </div>
+    <div class="cheat-box">
+      <div class="pro-asked"><b>4. "How would you support tenders with management-system documents?"</b><div class="why">Why: Legrand AU sells through construction &amp; data-centre tenders — quality docs are part of winning work.</div></div>
+      <div class="pro-asked"><b>5. "How do you promote Opportunities for Improvement across the organisation?"</b><div class="why">Why: CI promotion is a named duty in her history — they'll want to see yours.</div></div>
+      <div class="pro-asked"><b>6. "Your predecessor came from a QMS/audit background. What do you add beyond ISO 9001?"</b><div class="why">Why: the obvious comparison question — this is where you win.</div></div>
+    </div>
+  </div>
+
+  <h3 style="color:var(--heading);font-size:0.95rem;margin:20px 0 10px;">⚔️ Your edge — side by side</h3>
+  <table class="cmp">
+    <thead><tr><th>Dimension</th><th>Her profile</th><th>You</th></tr></thead>
+    <tbody>
+      <tr><td><b>Core strength</b></td><td>ISO 9001 QMS &amp; internal auditing</td><td class="win">QMS + EESS / GEMS/MEPS / ActivFire product compliance</td></tr>
+      <tr><td><b>Side of the chain</b></td><td>Logistics &amp; distribution quality (Pacific Zone)</td><td class="win">Manufacturing + R&amp;D site quality, supplier audits, SPC</td></tr>
+      <tr><td><b>Technical base</b></td><td>B.Com Accounting</td><td class="win">Engineering — B.S. Engineering, IIT Madras M.S. Industrial Engineering</td></tr>
+      <tr><td><b>Documentation</b></td><td>Promapp process mapping</td><td class="win">Promapp-class mapping + AI/automation dashboards (Power BI, Power Automate, UiPath)</td></tr>
+      <tr><td><b>The gap they may be filling</b></td><td>—</td><td class="win">Product-compliance depth for a fast-growing data-centre portfolio (VASS, Starline, Raritan)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cheat-grid">
+    <div class="cheat-box">
+      <h3><span class="icon">✅</span> Do</h3>
+      <ul>
+        <li class="do-say">Frame as evolution: "I'd build on the existing QMS rather than rebuild it."</li>
+        <li class="do-say">Bring evidence of tender/document support if you have it — it's clearly part of the job.</li>
+        <li class="do-say">If asked why the role is open: one neutral sentence, then turn to what you'd do.</li>
+      </ul>
+    </div>
+    <div class="cheat-box">
+      <h3><span class="icon">⛔</span> Don't</h3>
+      <ul>
+        <li class="dont-say">Never criticise the predecessor or call the current system "broken" — her colleagues may be in the room.</li>
+        <li class="dont-say">Don't overclaim electrical product certifications you don't hold — let the EESS/GEMS/ActivFire workflow knowledge speak.</li>
+        <li class="dont-say">Don't ask "why did the last person leave?" — recruiters hear it as risk aversion.</li>
+      </ul>
+    </div>
+    <div class="cheat-box">
+      <h3><span class="icon">🔗</span> Bonus move</h3>
+      <ul>
+        <li><strong>Richard Savoie</strong> is your mutual connection with her — ask Richard for a candid read on the team and what the role really needs before the interview.</li>
+        <li>Her LinkedIn still lists the role as current — don't reference "she left" in the interview; let them raise it.</li>
+      </ul>
     </div>
   </div>
 </div>

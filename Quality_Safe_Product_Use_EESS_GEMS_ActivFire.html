@@ -241,6 +241,16 @@ a{color:var(--brand)}
 .acro .def{font-size:13px;color:var(--ink-2);margin-top:2px;line-height:1.45}
 .acrogroup{margin:22px 0 4px;font-family:var(--font-m);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 
+/* ============ RS WALKTHROUGH ============ */
+.rs-steps details{margin-bottom:8px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+.rs-steps summary{cursor:pointer;padding:12px 16px;font-weight:700;font-size:14px;list-style:none;display:flex;gap:10px;align-items:baseline}
+.rs-steps summary::-webkit-details-marker{display:none}
+.rs-steps summary .rs-n{font-family:var(--font-m);color:var(--brand);font-size:12px}
+.rs-steps summary::after{content:"▸";margin-left:auto;color:var(--ink-3);transition:transform .15s}
+.rs-steps details[open] summary::after{transform:rotate(90deg)}
+.rs-steps .rs-body{padding:2px 16px 14px;font-size:13.5px;color:var(--ink-2)}
+.rs-steps .rs-body b{color:var(--ink)}
+
 /* ============ QUIZ ============ */
 .quiz{max-width:760px;margin-top:6px}
 .q-card{
@@ -448,6 +458,36 @@ td.mono{font-family:var(--font-m);font-size:12px}
       </ul>
       <div class="verdict"><b>Where compliance dies:</b> change control — a cheaper capacitor or a factory move voids the certificate. Re-assess before the change ships.</div>
     </div>
+
+    <h3 style="margin:26px 0 2px;font-size:17px">🧾 Responsible Supplier — step-by-step walkthrough</h3>
+    <p class="subhead">"The AU entity holding the ABN that manufactures or imports must be registered, with an Authorised Officer declaration, renewed annually." What that means, and how it's actually done. Click each step.</p>
+    <div class="rs-steps">
+      <details open>
+        <summary><span class="rs-n">STEP 1</span> Identify the Responsible Supplier</summary>
+        <div class="rs-body">The <b>one legal person in Australia answerable</b> for every in-scope product: the entity with the <b>ABN that manufactures here or imports here</b>. Not the overseas factory, not the certifier, not the brand owner. <b>If a distributor does the importing, the distributor is the RS</b> — which is why "who is the importer of record?" is the first question on every product.</div>
+      </details>
+      <details>
+        <summary><span class="rs-n">STEP 2</span> Create the account on the EESS Registration Database</summary>
+        <div class="rs-body">Register the entity on <b>eess.gov.au</b> (the consolidated national platform, relaunched Dec 2024): legal name, ABN, registered address, business contacts. This is the account every equipment registration hangs off.</div>
+      </details>
+      <details>
+        <summary><span class="rs-n">STEP 3</span> Nominate the Authorised Officer &amp; sign the declaration</summary>
+        <div class="rs-body">A named individual — a <b>director or senior manager who can genuinely know the compliance status</b> — completes the Authorised Officer declaration: a legal statement that supplied equipment meets the relevant safety standards. <b>This is personal liability, not a rubber stamp</b> — a false declaration is an offence with penalties. So it's a governance decision: who signs, under which procedure, with what evidence behind them.</div>
+      </details>
+      <details>
+        <summary><span class="rs-n">STEP 4</span> Pay the annual fee</summary>
+        <div class="rs-body">The RS registration runs <b>12 months</b> and is renewed with the annual fee. Budget it like a licence — not a once-off project cost.</div>
+      </details>
+      <details>
+        <summary><span class="rs-n">STEP 5</span> Renew annually &amp; keep details current</summary>
+        <div class="rs-body">Renew before expiry every year; notify changes to the Authorised Officer or entity. <b>A lapsed registration means you can no longer lawfully apply the RCM — so no supply.</b> This lands on the renewal calendar, right next to CoC expiries.</div>
+      </details>
+      <details>
+        <summary><span class="rs-n">STEP 6</span> Only then: register equipment, mark, and hold the folder</summary>
+        <div class="rs-body">With the RS registration live, you register the <b>equipment entries</b> (Level 2/3), apply the <b>RCM</b>, and build the <b>compliance folder</b> (test reports + SDOC). Order matters: RS registration → equipment registration → mark → supply.</div>
+      </details>
+    </div>
+    <div class="pattern eess"><span class="p-icon">🏭</span><div class="p-body"><b>Legrand angle:</b> imported specialist brands (Starline, Raritan, Minkels) ride on Legrand Australia Pty Ltd's RS registration; the VASS acquisition means verifying VASS's RS registrations and Authorised Officer arrangements transfer cleanly to the Legrand entity — textbook acquisition-compliance work you can name in the interview.</div></div>
   </section>
 
   <!-- ============ PANEL: GEMS ============ -->
