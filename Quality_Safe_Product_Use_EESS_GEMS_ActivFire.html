@@ -641,7 +641,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
 
     <div class="grid g2" style="margin-top:14px">
       <div class="pattern gems"><span class="p-icon">📖</span><div class="p-body"><b>E3, in plain English:</b> E3 = the Energy Rating program (Equipment Energy Efficiency) under the GEMS Act, and its register at <span class="mono">reg.energyrating.gov.au</span>. You register each model with an accredited test report → get a GEMS registration number (valid ~5 yrs, up to 42 days assessment, fee ~$440–780) → print the star label <b>matching the registered data exactly</b> → file the annual units-sold report by 31 Oct. The label, the register entry and the actual production must be the same product — a check-test replicates your registered claim.</div></div>
-      <div class="pattern warn"><span class="p-icon">📅</span><div class="p-body"><b>LED Lamps Determination 2025 — MEPS from 3 Mar 2026:</b> a Determination is the legislation that regulates one product class under GEMS. This one makes LED lamp registration mandatory and imposes MEPS (minimum luminous efficacy, IEC 62612 tests incl. 3,600-hr endurance) from 3 Mar 2026. For Legrand: every LED globe SKU registered + labelled <b>before</b> that date, existing labels re-verified, and model changes re-triggering registration — the perfect "new Determination lands, what do you do?" scenario.</div></div>
+      <div class="pattern warn"><span class="p-icon">📅</span><div class="p-body"><b>LED Lamps Determination 2025 (instrument F2025L00263) — MEPS from 3 Mar 2026:</b> a Determination is the legislation that regulates one product class under GEMS. In scope: LED lamps in the white-light chromaticity range (~1,940–12,500&nbsp;K), 100–82,000&nbsp;lm. MEPS ≈ <b>120&nbsp;lm/W threshold efficacy</b> with correction factors (end-loss 1.5&nbsp;W / 2.0&nbsp;W for connected lamps). Primary test option: <span class="mono">AS/NZS 5341:2021</span> incl. the 3,600-hr combined endurance test (an EU Annex V report may satisfy it). Exclusions include narrow spot beams &lt;10°, horticulture and UV lamps. For Legrand: every in-scope LED globe SKU registered + labelled <b>before</b> 3 Mar 2026, existing labels re-verified, and model changes re-triggering registration — the perfect "new Determination lands, what do you do?" scenario.</div></div>
     </div>
 
     <h3 style="margin:26px 0 2px;font-size:17px">📅 LED Lamps Determination — how to comply, step by step</h3>
@@ -657,6 +657,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
           <b>5. Capture what "in scope" triggers</b> — registration obligation, the <b>MEPS values from the Schedule</b>, labelling class, and the test method (IEC 62612 as amended).<br>
           <b>6. Document exclusions too</b> — cite the exclusion clause for out-of-scope SKUs. A documented exclusion is professional; an undocumented one looks like a guess.<br>
           <b>7. Version-control it</b> — when an amendment changes the scope clause, the register flags affected SKUs for re-classification.<br>
+          <b>Where exactly to read:</b> the instrument itself at <span class="mono">legislation.gov.au</span> — search <b>F2025L00263</b> (Greenhouse and Energy Minimum Standards (LED Lamps) Determination 2025). Read in order: commencement (§2 → 3 Mar 2026) → definitions → scope + Schedule 1 exclusions (white chromaticity ~1,940–12,500 K, 100–82,000 lm) → MEPS §§12–13 (~120 lm/W threshold + correction factors) → §22 test requirements (AS/NZS 5341:2021 + 3,600-hr test) → §§16–19 grandfathering. Cross-check with the regulator's guidance page at <span class="mono">energyrating.gov.au</span> (industry → products → LED lamps) and the Explanatory Statement.<br>
           <b>Why this wins:</b> the register from this step drives every test, registration and label downstream — "guessing at scope is where compliance programs fail on day one."
         </div>
       </details>
@@ -666,7 +667,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
       </details>
       <details>
         <summary><span class="rs-n">STEP 3</span> Commission the tests (book early)</summary>
-        <div class="rs-body">Production-representative samples to a NATA / ISO&nbsp;17025 lab (e.g. EMC Technologies Seven Hills) for <b>IEC 62612</b>: luminous efficacy + the <b>3,600-hour lumen-maintenance endurance test</b> — the long pole, so book first. Family registrations use the representative / worst-case model.</div>
+        <div class="rs-body">Production-representative samples to a NATA / ISO&nbsp;17025 lab (e.g. EMC Technologies Seven Hills) for <b>AS/NZS 5341:2021</b> (the Determination's primary test option, §22): luminous efficacy + the <b>3,600-hour combined luminous-flux-maintenance &amp; endurance test</b> — the long pole, so book first. An existing EU (Annex V, Regulation 2019/2020) report may satisfy it. Family registrations use the representative / worst-case model (standard family up to 100 models; special-purpose family up to 10).</div>
       </details>
       <details>
         <summary><span class="rs-n">STEP 4</span> Register on E3</summary>
@@ -693,11 +694,11 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <table>
         <thead><tr><th>Step</th><th>Action on this SKU</th><th>Outcome / document</th></tr></thead>
         <tbody>
-          <tr><td><b>1 · Read the Determination</b></td><td>Open the LED Lamps Determination 2025: scope provision, definitions, MEPS Schedule, commencement (3 Mar 2026).</td><td>Determination logged in the standards-monitoring register with review trigger</td></tr>
-          <tr><td><b>2 · Scope clause</b></td><td>Positive test: self-ballasted LED lamp? <b>Yes</b> (LED lamp, integrated driver). "For general lighting"? <b>No</b> — its purpose is insect control, and it emits yellow light: the special-purpose/coloured exclusions apply.</td><td><b>Likely EXCLUDED</b> → classification register entry: SKU → out-of-scope → exclusion clause cited</td></tr>
+          <tr><td><b>1 · Read the Determination</b></td><td>Open <b>F2025L00263</b> on legislation.gov.au: commencement (§2), definitions, scope + Schedule 1 exclusions, MEPS (§§12–13), test requirements (§22), grandfathering (§§16–19).</td><td>Determination logged in the standards-monitoring register with review trigger</td></tr>
+          <tr><td><b>2 · Scope clause</b></td><td>Positive test: self-ballasted LED lamp? <b>Yes</b>. Within the <b>white-light chromaticity range (~1,940–12,500&nbsp;K)</b>? <b>No</b> — it emits yellow light and its purpose is insect control.</td><td><b>EXCLUDED</b> → classification register entry: SKU → out-of-scope → chromaticity/scope clause cited</td></tr>
           <tr><td><b>3 · Document the exclusion</b></td><td>Record the exclusion rationale with the clause reference in the QMS — no registration, no MEPS, no star label for this SKU.</td><td>Documented exclusion (a regulator ask is answered in minutes)</td></tr>
           <tr><td><b>4 · Don't forget the other schemes</b></td><td>GEMS scope is separate: this lamp is still electrical equipment → <b>EESS Level 1 self-declared + RCM</b> still applies.</td><td>EESS evidence on file — "out of GEMS" ≠ "no obligations"</td></tr>
-          <tr><td><b>5 · Sibling SKU check</b></td><td>If a <b>general-purpose</b> version ships (e.g. an HPM Excel LED A60/E27 white globe, illustrative specs): in scope → MEPS vs Schedule → IEC 62612 test → E3 registration → star label → supply gated to 3 Mar 2026.</td><td>Full registration path for the in-scope siblings; exclusion only for the special-purpose line</td></tr>
+          <tr><td><b>5 · Sibling SKU check</b></td><td>If a <b>general-purpose</b> version ships (e.g. an HPM Excel LED A60/E27 white globe, illustrative specs): in scope → MEPS (~120&nbsp;lm/W threshold + correction factors) → AS/NZS 5341:2021 test → E3 registration → star label → supply gated to 3 Mar 2026 (grandfathering §§16–19 for pre-imported stock).</td><td>Full registration path for the in-scope siblings; exclusion only for the special-purpose line</td></tr>
         </tbody>
       </table>
     </div>
@@ -922,8 +923,8 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <div class="prodcard">
         <div class="prodimg"><img src="images/products/ledinsect.jpg" alt="HPM LED anti-insect lamp A55 E27 5W yellow" loading="lazy"></div>
         <div class="prodb"><div class="p-name">HPM LED anti-insect lamp (A55 E27 5W yellow)</div><div class="p-fam">LEGRAND AU · LIGHTING</div>
-        <div class="p-chips"><span class="vpill check">GEMS · likely excluded</span><span class="vpill yes">EESS · L1 self-declared</span></div>
-        <div class="p-note"><b>The scope-clause example, photographed:</b> a self-ballasted LED lamp but <b>special-purpose</b> (insect control, yellow) — the LED Determination's exclusions apply → document the exclusion with the clause cited. "Out of GEMS" ≠ no obligations: EESS L1 + RCM still stand.</div></div>
+        <div class="p-chips"><span class="vpill check">GEMS · excluded (yellow)</span><span class="vpill yes">EESS · L1 self-declared</span></div>
+        <div class="p-note"><b>The scope-clause example, photographed:</b> a self-ballasted LED lamp, but its yellow emission sits <b>outside the Determination's white-light chromaticity range (~1,940–12,500&nbsp;K)</b> → excluded from GEMS (F2025L00263) — document the exclusion with the clause cited. "Out of GEMS" ≠ no obligations: EESS L1 + RCM still stand.</div></div>
       </div>
       <div class="prodcard">
         <div class="prodimg glyph"><svg width="110" height="70" viewBox="0 0 110 70" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="30" y="10" width="50" height="40" rx="4"/><path d="M36 16 h38 M36 22 h38 M36 28 h38 M36 34 h38 M36 40 h38" stroke-width="1.5"/><path d="M55 50 v8"/><rect x="46" y="58" width="18" height="4" rx="2"/><text x="55" y="76" text-anchor="middle" font-size="7" fill="currentColor" stroke="none" font-family="monospace">schematic</text></svg></div>
@@ -1306,7 +1307,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <table>
         <thead><tr><th>Standard / method</th><th>What it measures</th><th>Legrand relevance</th></tr></thead>
         <tbody>
-          <tr><td class="mono"><b>IEC 62612</b></td><td>Self-ballasted LED lamps — luminous efficacy + 3,600-hr lumen-maintenance endurance</td><td>LED globes under the LED Lamps Determination 2025 (MEPS from 3 Mar 2026)</td></tr>
+          <tr><td class="mono"><b>AS/NZS 5341:2021</b></td><td>LED lamps — energy and functional performance test methods (the LED Lamps Determination 2025's primary test option, §22) — incl. the 3,600-hr combined endurance test</td><td>LED globes under the LED Lamps Determination 2025 (MEPS from 3 Mar 2026; EU Annex V reports may satisfy it)</td></tr>
           <tr><td class="mono"><b>AS/NZS 4474</b> (example)</td><td>Refrigerator energy consumption + star rating</td><td>Check-style example — a Determination names the method per class; USystems coolers = confirm the applicable Determination</td></tr>
           <tr><td class="mono"><b>IEC 60034-2-1</b></td><td>Three-phase electric motor efficiency</td><td>Plant motors at Prestons — motors are a regulated GEMS class even in factories</td></tr>
           <tr><td class="mono"><b>AS/NZS 62087.1/.2.2</b></td><td>TV/monitor energy consumption + standby</td><td>Monitors/display products if Legrand ever carries them — the standby ≤1&nbsp;W story</td></tr>
