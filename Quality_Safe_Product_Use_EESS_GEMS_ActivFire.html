@@ -633,7 +633,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
       </div>
       <div class="card lv l1"><span class="lv-n" style="color:var(--warn)">Check &amp; monitor</span><h3>Boundary products</h3>
         <ul style="margin:6px 0 0;padding-left:16px">
-          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><b>USystems coolers</b> — check refrigeration Determinations</li>
+          <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><b>USystems coolers</b> — check <span class="mono">F2020L01014</span> (refrigerated cabinets: five retail cabinet classes — a rear-door cooler cools IT equipment, not products) + the AC Determination's close-control exclusion → document the exclusion, keep a monitor</li>
           <li style="font-size:12.5px;color:var(--ink-2);margin-bottom:4px"><b>Keor UPS</b> — no UPS Determination today; monitor</li>
           <li style="font-size:12.5px;color:var(--ink-2)"><b>Out of scope:</b> racks, busway, RCBOs, cable tray — not energy-using classes</li>
         </ul>
@@ -836,7 +836,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
         <div class="prodimg glyph"><svg width="110" height="70" viewBox="0 0 110 70" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="12" y="8" width="86" height="56" rx="3"/><circle cx="55" cy="30" r="12"/><path d="M55 18 a12 12 0 0 1 0 24"/><path d="M20 16 h86" stroke-width="1.5"/><text x="55" y="76" text-anchor="middle" font-size="7" fill="currentColor" stroke="none" font-family="monospace">schematic</text></svg></div>
         <div class="prodb"><div class="p-name">USystems rear-door cooler</div><div class="p-fam">USYSTEMS · WHITE SPACE <span class="dc">🏢 DATA CENTRE</span></div>
         <div class="p-chips"><span class="vpill check">EESS · check</span><span class="vpill check">GEMS · check</span><span class="vpill no">ActivFire · no</span></div>
-        <div class="p-note"><b>The double-check product:</b> professional HVAC — EESS household-type check (likely out, verify). GEMS: confirm whether a refrigeration Determination captures the model. Refrigerant GWP documentation + EMC for fans/controls either way.</div></div>
+        <div class="p-note"><b>The double-check product, with F-numbers:</b> professional HVAC — EESS household-type check (likely out, verify). GEMS: the five cabinet classes in <span class="mono">F2020L01014</span> (RDCs, drinks, RSC, ice-cream, scooping) all require retail storage/display of items — a rear-door cooler cools <b>IT equipment</b> → not captured; the AC Determination excludes close-control units. <b>Document the exclusion</b> and keep a monitor. Still applies: refrigerant GWP/SDS + ARCtick handling records, and EMC (CISPR family + IEC 61000-4-x) for fans/controls.</div></div>
       </div>
       <div class="prodcard">
         <div class="prodimg glyph"><svg width="110" height="70" viewBox="0 0 110 70" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="30" y="12" width="50" height="26" rx="3"/><circle cx="48" cy="31" r="3.5"/><path d="M52 35 l4 8 M44 35 l-4 8" stroke-width="1.8"/><path d="M42 46 h26"/><path d="M38 46 v-6 M72 46 v-6"/><text x="55" y="70" text-anchor="middle" font-size="7" fill="currentColor" stroke="none" font-family="monospace">schematic</text></svg></div>
@@ -1743,12 +1743,13 @@ td.mono{font-family:var(--font-m);font-size:12px}
         ["ActivFire", "no", "not fire protection"]
       ],
       h: "The double-check product",
-      p: "Cooling equipment is exactly where scope checks matter: professional HVAC is usually outside EESS household-type scope, but GEMS regulates commercial refrigeration classes (e.g. refrigerated display cabinets) — so you confirm whether a Determination captures your model. 'Check, don't guess' is the professional answer.",
+      p: "Cooling equipment is exactly where scope checks matter: professional HVAC is usually outside EESS household-type scope, and GEMS's refrigerated-cabinet classes (F2020L01014: display, drinks, storage, ice-cream, scooping) all require retail storage/display of items — a rear-door cooler cools IT equipment, so none captures it, and the AC Determination excludes close-control units. Document the exclusion, keep a monitor, and hold the other evidence: refrigerant GWP/SDS + ARCtick records, and EMC for the fans and controls.",
       steps: [
         "EESS in-scope check: household-type? (professional HVAC — likely out, verify)",
-        "GEMS class check against refrigeration Determinations",
-        "EMC evidence (ACMA) + refrigerant/GWP documentation",
-        "Supplier SDOC; monitor Determination scope changes"
+        "GEMS scope check: F2020L01014 cabinet classes + AC Determination exclusions → document the exclusion",
+        "Refrigerant documentation: SDS, GWP, charge records; ARCtick-licensed handling",
+        "EMC evidence (CISPR family + IEC 61000-4-x) → ACMA RCM",
+        "Supplier SDOC; monitor Determinations for new data-centre cooling classes"
       ]
     },
     emerg: {
