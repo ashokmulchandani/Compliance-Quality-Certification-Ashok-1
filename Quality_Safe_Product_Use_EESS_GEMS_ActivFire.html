@@ -251,6 +251,7 @@ a{color:var(--brand)}
 .prodb{ padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
 .prodb .p-name{font-weight:700;font-size:14px;line-height:1.3}
 .prodb .p-fam{font-family:var(--font-m);font-size:11px;color:var(--ink-3)}
+.prodb .dc{font-family:var(--font-m);font-size:10.5px;font-weight:600;color:var(--brand);background:var(--surface-2);border:1px solid var(--brand);border-radius:999px;padding:1px 7px;margin-left:4px;white-space:nowrap}
 .prodb .p-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
 .prodb .p-note{font-size:12px;color:var(--ink-2);line-height:1.4}
 
@@ -804,35 +805,35 @@ td.mono{font-family:var(--font-m);font-size:12px}
   <!-- ============ PANEL: PRODUCTS ============ -->
   <section class="panel" role="tabpanel" id="panel-products" hidden>
     <h2>📦 The Legrand products we've discussed — with photos</h2>
-    <p class="subhead">Every product referenced across this trainer, with its compliance footprint. Real photos where publicly available; schematic glyphs (marked) where vendor sites block downloads — the compliance story is identical either way.</p>
+    <p class="subhead">Every product referenced across this trainer, with its compliance footprint. <span class="dc" style="display:inline-block">🏢 DATA CENTRE</span> marks the grey-space/white-space specialist products (the fast-growing side of the business). Real photos where publicly available; schematic glyphs (marked) where vendor sites block downloads — the compliance story is identical either way.</p>
     <div class="prodgrid">
       <div class="prodcard">
         <div class="prodimg glyph"><svg width="110" height="70" viewBox="0 0 110 70" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="18" y="8" width="74" height="50" rx="4"/><path d="M55 8 v50"/><circle cx="46" cy="28" r="7"/><path d="M36 46 h18"/><path d="M52 20 l6 8 M52 28 l6 0" stroke-width="1.8"/><text x="55" y="70" text-anchor="middle" font-size="7" fill="currentColor" stroke="none" font-family="monospace">schematic</text></svg></div>
-        <div class="prodb"><div class="p-name">Keor FLEX UPS</div><div class="p-fam">BORRI · GREY SPACE</div>
+        <div class="prodb"><div class="p-name">Keor FLEX UPS</div><div class="p-fam">BORRI · GREY SPACE <span class="dc">🏢 DATA CENTRE</span></div>
         <div class="p-chips"><span class="vpill check">EESS · scope check</span><span class="vpill no">GEMS · monitor</span><span class="vpill no">ActivFire · no</span></div>
         <div class="p-note"><b>Scope check explained:</b> safety testing to <span class="mono">AS/NZS 62040.1</span> applies regardless. EESS registration depends on the household-type test — a data-centre UPS is likely out of scope, a <b>portable/home UPS is in scope</b> (EESS guidance 20-006 names AS 62040.1 for portable UPS devices). EMC RCM via ACMA either way. Document the classification.</div></div>
       </div>
       <div class="prodcard">
         <div class="prodimg glyph"><svg width="110" height="70" viewBox="0 0 110 70" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="6" y="20" width="98" height="14" rx="3"/><circle cx="24" cy="27" r="3.5"/><circle cx="44" cy="27" r="3.5"/><circle cx="64" cy="27" r="3.5"/><circle cx="84" cy="27" r="3.5"/><rect x="88" y="34" width="12" height="14" rx="2"/><path d="M94 20 v-8" stroke-width="1.8"/><text x="55" y="64" text-anchor="middle" font-size="7" fill="currentColor" stroke="none" font-family="monospace">schematic</text></svg></div>
-        <div class="prodb"><div class="p-name">Raritan PX4 rack PDU</div><div class="p-fam">RARITAN · WHITE SPACE</div>
+        <div class="prodb"><div class="p-name">Raritan PX4 rack PDU</div><div class="p-fam">RARITAN · WHITE SPACE <span class="dc">🏢 DATA CENTRE</span></div>
         <div class="p-chips"><span class="vpill check">EESS · scope check</span><span class="vpill yes">EMC · CISPR 32</span><span class="vpill no">GEMS · no</span></div>
         <div class="p-note"><b>Scope check explained:</b> IT equipment — safety to <span class="mono">AS/NZS 62368.1</span> and EMC to <span class="mono">CISPR 32</span> apply regardless. EESS registration depends on the household-type test: a data-centre PDU is likely out of scope, a home-office SKU flips in (EPOD-like, possibly L3). No GEMS Determination for PDUs. Document the classification.</div></div>
       </div>
       <div class="prodcard">
         <div class="prodimg"><img src="images/products/busway.png" alt="Starline track busway" loading="lazy"></div>
-        <div class="prodb"><div class="p-name">Starline track busway</div><div class="p-fam">STARLINE · GREY SPACE</div>
+        <div class="prodb"><div class="p-name">Starline track busway</div><div class="p-fam">STARLINE · GREY SPACE <span class="dc">🏢 DATA CENTRE</span></div>
         <div class="p-chips"><span class="vpill no">EESS · fixed install</span><span class="vpill yes">AS/NZS 3000</span><span class="vpill no">ActivFire · no</span></div>
         <div class="p-note"><b>Fixed installation, not plug-in equipment:</b> governed by <span class="mono">AS/NZS 3000</span> Wiring Rules and installation compliance — outside EESS registration. Active metering components (M70) carry EMC obligations via ACMA. SDOC held for the imported product regardless.</div></div>
       </div>
       <div class="prodcard">
         <div class="prodimg glyph"><svg width="110" height="70" viewBox="0 0 110 70" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="20" y="6" width="70" height="58" rx="3"/><path d="M28 6 v58 M82 6 v58"/><path d="M30 18 h8 M30 24 h8 M30 30 h8 M30 36 h8 M30 42 h8 M30 48 h8 M72 18 h8 M72 24 h8 M72 30 h8 M72 36 h8 M72 42 h8 M72 48 h8"/><text x="55" y="76" text-anchor="middle" font-size="7" fill="currentColor" stroke="none" font-family="monospace">schematic</text></svg></div>
-        <div class="prodb"><div class="p-name">Minkels Nexpand rack</div><div class="p-fam">MINKELS · WHITE SPACE</div>
+        <div class="prodb"><div class="p-name">Minkels Nexpand rack</div><div class="p-fam">MINKELS · WHITE SPACE <span class="dc">🏢 DATA CENTRE</span></div>
         <div class="p-chips"><span class="vpill no">EESS · passive</span><span class="vpill no">GEMS · no</span><span class="vpill no">ActivFire · no</span></div>
         <div class="p-note"><b>Passive structure:</b> no electrical scheme applies — document the exclusion. What remains: NCC fire-rating / material documentation, supplier quality (incoming inspection, traceability) and spec conformity against the order.</div></div>
       </div>
       <div class="prodcard">
         <div class="prodimg glyph"><svg width="110" height="70" viewBox="0 0 110 70" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="12" y="8" width="86" height="56" rx="3"/><circle cx="55" cy="30" r="12"/><path d="M55 18 a12 12 0 0 1 0 24"/><path d="M20 16 h86" stroke-width="1.5"/><text x="55" y="76" text-anchor="middle" font-size="7" fill="currentColor" stroke="none" font-family="monospace">schematic</text></svg></div>
-        <div class="prodb"><div class="p-name">USystems rear-door cooler</div><div class="p-fam">USYSTEMS · WHITE SPACE</div>
+        <div class="prodb"><div class="p-name">USystems rear-door cooler</div><div class="p-fam">USYSTEMS · WHITE SPACE <span class="dc">🏢 DATA CENTRE</span></div>
         <div class="p-chips"><span class="vpill check">EESS · check</span><span class="vpill check">GEMS · check</span><span class="vpill no">ActivFire · no</span></div>
         <div class="p-note"><b>The double-check product:</b> professional HVAC — EESS household-type check (likely out, verify). GEMS: confirm whether a refrigeration Determination captures the model. Refrigerant GWP documentation + EMC for fans/controls either way.</div></div>
       </div>
@@ -910,7 +911,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
       </div>
       <div class="prodcard">
         <div class="prodimg"><img src="images/products/cablofil.jpg" alt="Cablofil cable tray splice coupler" loading="lazy"></div>
-        <div class="prodb"><div class="p-name">Cablofil cable tray system</div><div class="p-fam">LEGRAND AU · CABLE MANAGEMENT</div>
+        <div class="prodb"><div class="p-name">Cablofil cable tray system</div><div class="p-fam">LEGRAND AU · CABLE MANAGEMENT <span class="dc">🏢 DATA CENTRE</span></div>
         <div class="p-chips"><span class="vpill no">EESS · fixed install</span><span class="vpill yes">AS/NZS 3000</span></div>
         <div class="p-note"><b>Fixed-installation world:</b> cable pathways follow <span class="mono">AS/NZS 3000</span> + NCC fire-rating rules, not EESS registration. Supplier quality + SDOC for the imported product.</div></div>
       </div>
