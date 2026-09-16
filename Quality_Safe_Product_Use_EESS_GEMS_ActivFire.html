@@ -648,8 +648,17 @@ td.mono{font-family:var(--font-m);font-size:12px}
     <p class="subhead">The operational play for the 3 Mar 2026 MEPS date. Click each step.</p>
     <div class="rs-steps">
       <details open>
-        <summary><span class="rs-n">STEP 1</span> Read the Determination itself</summary>
-        <div class="rs-body">Pull the legislative instrument (energyrating.gov.au → Federal Register of Legislation). Extract: <b>scope</b> (which lamps in/out — self-ballasted LED lamps for general lighting), the <b>test method</b> (IEC 62612), the <b>MEPS values</b> (minimum luminous efficacy lm/W), <b>labelling</b> requirements, and the commencement date (3 Mar 2026).</div>
+        <summary><span class="rs-n">STEP 1</span> Read the Determination itself — the scope clause play</summary>
+        <div class="rs-body">
+          <b>1. Get the authoritative text</b> — Federal Register of Legislation (<span class="mono">legislation.gov.au</span>), never summaries. Note the F-number, date and amendments; log it in the standards-monitoring register.<br>
+          <b>2. Find the scope provision</b> — the "Application"/"Scope" section: positive tests (<i>"applies to products that are self-ballasted LED lamps for general lighting…"</i>) plus a list of exclusions.<br>
+          <b>3. Read the definitions first</b> — "self-ballasted", "general lighting service", "family" are defined terms; the definitions decide in/out, not marketing names.<br>
+          <b>4. Classify SKU by SKU</b> — build the classification register: does it satisfy the positive scope tests AND avoid every exclusion? Record SKU → family → in/out → <b>clause reference</b> → requirement attached (registration? MEPS? label?).<br>
+          <b>5. Capture what "in scope" triggers</b> — registration obligation, the <b>MEPS values from the Schedule</b>, labelling class, and the test method (IEC 62612 as amended).<br>
+          <b>6. Document exclusions too</b> — cite the exclusion clause for out-of-scope SKUs. A documented exclusion is professional; an undocumented one looks like a guess.<br>
+          <b>7. Version-control it</b> — when an amendment changes the scope clause, the register flags affected SKUs for re-classification.<br>
+          <b>Why this wins:</b> the register from this step drives every test, registration and label downstream — "guessing at scope is where compliance programs fail on day one."
+        </div>
       </details>
       <details>
         <summary><span class="rs-n">STEP 2</span> Classify every SKU</summary>
