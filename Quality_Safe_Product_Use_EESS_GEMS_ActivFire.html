@@ -367,6 +367,7 @@ td.mono{font-family:var(--font-m);font-size:12px}
       <button class="tab" role="tab" aria-selected="false" data-tab="iso9001"><span class="em">🏛️</span>ISO 9001</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="iso"><span class="em">🧪</span>ISO Standards</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="teststd"><span class="em">🔬</span>Test Standards</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="docs"><span class="em">📋</span>Docs &amp; Samples</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="emc"><span class="em">📡</span>EMC &amp; EMI</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="exp"><span class="em">💼</span>My Experience</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="cheat"><span class="em">📚</span>Cheat Sheet</button>
@@ -1152,6 +1153,89 @@ td.mono{font-family:var(--font-m);font-size:12px}
       </table>
     </div>
     <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>Interview line:</b> "One product, two questions — which <b>Part 2</b> of the safety standard applies, and what's the <b>EMC</b> pathway. A fan is 60335.1 + 60335.2.80; a PDU is 62368.1 + CISPR 32. Classify first, then test."</div></div>
+  </section>
+
+  <!-- ============ PANEL: DOCS & SAMPLES ============ -->
+  <section class="panel" role="tabpanel" id="panel-docs" hidden>
+    <h2>📋 Documents &amp; sample sizes — the certification paperwork</h2>
+    <p class="subhead">Two things interviewers can pin you on: <b>how many units</b> each scheme consumes, and <b>what documents you hold at each stage</b>. Both below, from the scheme rules and check-test policies.</p>
+
+    <h3 style="margin:20px 0 0;font-size:15px">1 · Sample sizes — how many units each scheme eats</h3>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Scheme</th><th>Registration / certification testing</th><th>Regulator check-testing (post-launch)</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="mono"><b>⚡ EESS</b></td>
+            <td><b>2–6 units</b> typical (commonly 2–4; lighting ~3; series models = main + difference models)</td>
+            <td>State regulators via market surveillance — no fixed public quota</td>
+            <td>Units must be <b>production-state</b> with full accessories + nameplate. Destructive tests (glow-wire, flammability) consume extra units — confirm exact count with the lab/certifier.</td>
+          </tr>
+          <tr>
+            <td class="mono"><b>🔌 GEMS/MEPS</b></td>
+            <td><b>1 production-representative unit per model</b> (family registrations use the representative / worst-case model; spares for long tests like LED 3,600-hr endurance)</td>
+            <td><b>Stage 2 (per GEMS Check Testing Policy):</b> labelling = <b>3 units</b>, average must pass · performance = <b>2 units</b> (a 3rd tested only if one fails) · performance claims = minimum <b>3 units</b>, majority must pass</td>
+            <td>Quoting the 3/2/3 Stage-2 numbers in an interview signals you've read the policy, not the brochure.</td>
+          </tr>
+          <tr>
+            <td class="mono"><b>🔥 ActivFire</b></td>
+            <td><b>No fixed published number</b> — set per product in CSIRO's <b>Verification Plan (AF-D001)</b></td>
+            <td>Batch selection / inspection for ongoing surveillance per the scheme rules</td>
+            <td>Fire tests are <b>destructive</b> — expect multiple units. The Verification Plan names the standard, test agency and fees.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin:24px 0 0;font-size:15px">2 · Documents required at each stage — EESS</h3>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Stage</th><th>Documents you need / hold</th><th>Issued by</th></tr></thead>
+        <tbody>
+          <tr><td><b>1 · Scope &amp; classify</b></td><td>Product spec sheet, technical drawings, ratings-plate details (in-scope check + <span class="mono">AS/NZS 4417.2</span> risk level)</td><td>You + R&amp;D (internal)</td></tr>
+          <tr><td><b>2 · Test</b></td><td>Lab quote &amp; order, sample submission form → <b>accredited test report</b></td><td>NATA/ILAC/CBTL lab</td></tr>
+          <tr><td><b>3 · Certify (L3)</b></td><td>Test report + application + product photos &amp; label files → <b>Certificate of Conformity</b></td><td>JAS-ANZ certifier</td></tr>
+          <tr><td><b>4 · Register</b></td><td>RS registration (ABN + Authorised Officer declaration); equipment application; CoC (L3); per-company EESS platform Email ID</td><td>You + EESS database</td></tr>
+          <tr><td><b>5 · Mark</b></td><td>RCM artwork &amp; label files, approved before print</td><td>You (factory applies under your oversight)</td></tr>
+          <tr><td><b>6 · Release &amp; declare</b></td><td><b>SDOC</b> + compliance folder (test report, CoC, registration number)</td><td>You</td></tr>
+          <tr><td><b>7 · Ongoing</b></td><td>Renewal records, change-control re-assessments, NCR/CAPA records</td><td>You (+ certifier surveillance)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin:24px 0 0;font-size:15px">3 · Documents required at each stage — GEMS/MEPS</h3>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Stage</th><th>Documents you need / hold</th><th>Issued by</th></tr></thead>
+        <tbody>
+          <tr><td><b>1 · Scope</b></td><td>Determination check for the product class; product specs &amp; model list</td><td>You (internal)</td></tr>
+          <tr><td><b>2 · Test</b></td><td>Lab order; <b>accredited report</b> with AEC, star-rating calculations + uncertainty budget</td><td>NATA / ISO&nbsp;17025 lab you commission</td></tr>
+          <tr><td><b>3 · Certify</b></td><td><b>None — there is no certifier in GEMS</b></td><td>—</td></tr>
+          <tr><td><b>4 · Register</b></td><td>E3 account (ABN entity), test report, product docs (specs, model list, label artwork), fee (~$440–780) → <b>registration number</b> (up to 42 days)</td><td>You + GEMS Regulator</td></tr>
+          <tr><td><b>5 · Mark</b></td><td>Energy Rating Label artwork matching the registered data</td><td>You (factory applies)</td></tr>
+          <tr><td><b>6 · Release &amp; declare</b></td><td>Registration on file; <b>annual compliance report</b> (units sold, by 31 Oct)</td><td>You</td></tr>
+          <tr><td><b>7 · Ongoing</b></td><td>Check-test response records; evidence that production = registered claim</td><td>You + Regulator</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin:24px 0 0;font-size:15px">4 · Documents required at each stage — ActivFire</h3>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Stage</th><th>Documents you need / hold</th><th>Issued by</th></tr></thead>
+        <tbody>
+          <tr><td><b>1 · Scope</b></td><td>Product information → <b>Verification Plan</b> (AF-D001): applicable standard/TS, test agency, fees</td><td>CSIRO</td></tr>
+          <tr><td><b>2 · Test</b></td><td>Samples per the plan; test evidence incl. <b>witness statements</b> (scheme-witnessed since Jan 2026)</td><td>CSIRO labs / recognised labs</td></tr>
+          <tr><td><b>3 · Certify</b></td><td>CoC application → <b>Certificate of Conformity</b> (one per agent/distributor)</td><td>CSIRO Verification Services</td></tr>
+          <tr><td><b>4 · Register</b></td><td><b>ActivFire Register</b> listing (public)</td><td>CSIRO</td></tr>
+          <tr><td><b>5 · Mark</b></td><td>Labels &amp; manuals per Advisory Note <b>AN-014</b></td><td>You (factory applies)</td></tr>
+          <tr><td><b>6 · Release &amp; declare</b></td><td>CoC on file; register listing current</td><td>You</td></tr>
+          <tr><td><b>7 · Ongoing</b></td><td><b>FPC audit records</b> (new from Jan 2026), batch sampling records, product-change verification</td><td>You + CSIRO</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>The pattern that proves you've done it:</b> the lab and certifier only own the testing and certifying steps — scope, registration, marking, SDOC and everything ongoing is <b>your</b> document set, held in the controlled QMS. "My compliance folder answers any regulator in 10–14 days because every stage has a named document owner."</div></div>
   </section>
 
   <!-- ============ PANEL: EMC & EMI ============ -->
