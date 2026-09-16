@@ -1113,8 +1113,8 @@ td.mono{font-family:var(--font-m);font-size:12px}
 
   <!-- ============ PANEL: TEST STANDARDS ============ -->
   <section class="panel" role="tabpanel" id="panel-teststd" hidden>
-    <h2>🔬 Product testing standards — AS/NZS, mapped to Legrand</h2>
-    <p class="subhead">The joint Australian/New Zealand product standards the labs test against. Each product class has a <b>Part 1</b> (general umbrella) plus <b>Part 2</b> rules for specific product types — a product claims compliance to both (e.g. <span class="mono">AS/NZS 60335.1 + 60335.2.80</span>). EMC emissions (<span class="mono">CISPR 32</span>) applies <b>alongside</b> the safety standard for anything with electronics.</p>
+    <h2>🔬 Product testing standards — AS/NZS &amp; AS, mapped to Legrand</h2>
+    <p class="subhead">The joint Australian/New Zealand product standards the labs test against — plus the AS fire-side standards and the GEMS energy test methods. Each product class has a <b>Part 1</b> (general umbrella) plus <b>Part 2</b> rules for specific product types — a product claims compliance to both (e.g. <span class="mono">AS/NZS 60335.1 + 60335.2.80</span>). EMC emissions (<span class="mono">CISPR 32</span>) and immunity (<span class="mono">CISPR 35</span>) apply <b>alongside</b> the safety standard for anything with electronics.</p>
     <div class="tblwrap">
       <table>
         <thead><tr><th>Standard</th><th>What it sets (short description)</th><th>Legrand products it applies to</th></tr></thead>
@@ -1177,9 +1177,39 @@ td.mono{font-family:var(--font-m);font-size:12px}
             <td>Applies to <b>every active product with electronics</b>: rack PDUs, smart devices, LED drivers, UPS, dimmers, fan controls — safety test + EMC test = one RCM.</td>
           </tr>
           <tr>
-            <td class="mono"><b>AS/NZS 62040</b></td>
+            <td class="mono"><b>AS/NZS 62040.1</b></td>
             <td>Safety requirements for <b>uninterruptible power systems (UPS)</b>.</td>
-            <td><b>Keor FLEX / Keor range (Borri)</b> — the data-centre grey-space launch product.</td>
+            <td><b>Keor FLEX / Keor range (Borri)</b> — the data-centre grey-space launch product. Tested regardless of EESS scope; <b>portable UPS devices are in-scope</b> (EESS guidance 20-006).</td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS 61009.1</b></td>
+            <td>Safety of <b>RCBOs</b> — residual current circuit breakers with overcurrent protection.</td>
+            <td><b>DX³ RCBOs</b> (and TX³ MCBs to <span class="mono">IEC 60898/60947</span> family) — the circuit-protection range; also NSW declared articles.</td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS 3760</b></td>
+            <td><b>In-service safety inspection and testing</b> of electrical equipment — the "test &amp; tag" standard.</td>
+            <td>Plant, tools and portable equipment at the <b>Prestons manufacturing site</b> (and my Sydney Trains/Stramit past) — the ongoing-safety side of EESS.</td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS 4417.1 / 4417.2 / 3820</b></td>
+            <td>Marking rules (4417.1), <b>risk-level classification</b> (4417.2), essential safety requirements (3820) — the EESS system standards behind every test.</td>
+            <td>Every EESS product above: classify with 4417.2 → test to the product standard → mark per 4417.1.</td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS/NZS CISPR 35</b></td>
+            <td><b>EMC immunity</b> for multimedia equipment — the counterpart of CISPR 32's emissions.</td>
+            <td>Same active products as CISPR 32 — the "emissions out, immunity in" pair behind the RCM's EMC half.</td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS 2293.3</b></td>
+            <td><b>Emergency luminaires and exit signs</b> — the fire-side standard behind the ActivFire certification.</td>
+            <td><b>Galaxy/Axiom emergency luminaires &amp; exit signs</b> — pairs with 60598.2.22 on the EESS side: one product, two standards families.</td>
+          </tr>
+          <tr>
+            <td class="mono"><b>AS 3786</b></td>
+            <td><b>Smoke alarms</b> — 2023 edition per CSIRO TS-007.</td>
+            <td><b>HPM smoke alarms</b> (Door Entry &amp; Security range) — ActivFire CoC + register listing.</td>
           </tr>
           <tr>
             <td class="mono"><b>AS/NZS 3000</b></td>
@@ -1189,7 +1219,19 @@ td.mono{font-family:var(--font-m);font-size:12px}
         </tbody>
       </table>
     </div>
-    <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>Interview line:</b> "One product, two questions — which <b>Part 2</b> of the safety standard applies, and what's the <b>EMC</b> pathway. A fan is 60335.1 + 60335.2.80; a PDU is 62368.1 + CISPR 32. Classify first, then test."</div></div>
+    <h3 style="margin:24px 0 0;font-size:15px">GEMS energy test methods — the standards behind the star label</h3>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Standard / method</th><th>What it measures</th><th>Legrand relevance</th></tr></thead>
+        <tbody>
+          <tr><td class="mono"><b>IEC 62612</b></td><td>Self-ballasted LED lamps — luminous efficacy + 3,600-hr lumen-maintenance endurance</td><td>LED globes under the LED Lamps Determination 2025 (MEPS from 3 Mar 2026)</td></tr>
+          <tr><td class="mono"><b>AS/NZS 4474</b> (example)</td><td>Refrigerator energy consumption + star rating</td><td>Check-style example — a Determination names the method per class; USystems coolers = confirm the applicable Determination</td></tr>
+          <tr><td class="mono"><b>IEC 60034-2-1</b></td><td>Three-phase electric motor efficiency</td><td>Plant motors at Prestons — motors are a regulated GEMS class even in factories</td></tr>
+          <tr><td class="mono"><b>AS/NZS 62087.1/.2.2</b></td><td>TV/monitor energy consumption + standby</td><td>Monitors/display products if Legrand ever carries them — the standby ≤1&nbsp;W story</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pattern"><span class="p-icon">🧠</span><div class="p-body"><b>Interview line:</b> "One product, two questions — which <b>Part 2</b> of the safety standard applies, and what's the <b>EMC</b> pathway. A fan is 60335.1 + 60335.2.80; a PDU is 62368.1 + CISPR 32/35; an RCBO is 61009.1. Classify first, then test."</div></div>
   </section>
 
   <!-- ============ PANEL: DOCS & SAMPLES ============ -->
