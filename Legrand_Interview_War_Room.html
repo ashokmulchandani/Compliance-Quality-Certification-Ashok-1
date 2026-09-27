@@ -238,11 +238,12 @@
 
 <!-- ==================== FLASHCARDS ==================== -->
 <div id="flashcards" class="panel active">
-  <p class="panel-intro">15 questions with model answers, built from <b>your</b> resume numbers — nothing unsubstantiated. Click the card to flip; filter by interviewer.</p>
+  <p class="panel-intro">21 questions with model answers, built from <b>your</b> resume numbers — nothing unsubstantiated. Click the card to flip; filter by interviewer.</p>
   <div class="filter-row" id="flashcardFilters">
-    <button class="filter-chip active" data-filter="all">All (15)</button>
+    <button class="filter-chip active" data-filter="all">All (21)</button>
     <button class="filter-chip" data-filter="Paul">👤 Paul — technical (7)</button>
     <button class="filter-chip" data-filter="Erika">👤 Erika — behavioural (8)</button>
+    <button class="filter-chip" data-filter="Daniel">👤 Daniel — ops (6)</button>
   </div>
   <div class="flashcard-container">
     <div class="flashcard" id="flashcard">
@@ -343,6 +344,48 @@
           <li>What makes people stay at the Prestons site?</li>
           <li>What does success look like in the first 90 days, from your perspective?</li>
           <li>How do R&amp;D and manufacturing collaborate day to day?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="interviewer-card" id="cardDaniel">
+      <h3>Daniel Vega Oropeza</h3>
+      <div class="role">Head of Operations, Supply Chain &amp; Continuous Improvement — Legrand Australia</div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">11+ yrs</div><div class="stat-label">Legrand Australia</div></div>
+        <div class="stat"><div class="stat-val">2015–18</div><div class="stat-label">Production Mgr · ~100 people</div></div>
+        <div class="stat"><div class="stat-val">Bticino MX</div><div class="stat-label">2008–14 · Legrand Group</div></div>
+        <div class="stat"><div class="stat-val">Shingo</div><div class="stat-label">Lean Japan tour 2010</div></div>
+      </div>
+      <div class="detail">
+        <h4>Why he matters to you</h4>
+        <ul>
+          <li>As Production Manager (2015–18) he ran <b>~100 people across Emergency Lighting (electronic) and User Interface (electric)</b> — the Galaxy line is HIS old floor. ActivFire + EESS aren't theory to him.</li>
+          <li>Owns the ANZ <b>Mid-term Industrial Plan + KPIs</b>: production performance, service level, quality control, expenses.</li>
+          <li>Responsible for <b>+$3M AUD/yr investment control and +$4.2M AUD/yr savings</b>; ERP upgrade project manager (~$3M).</li>
+          <li>At Bticino de México he launched <b>50+ products/yr with UL/IEC/ANCE certifications</b> — he has done new-product compliance himself.</li>
+          <li>Lean + Industry 4.0: Shingo Prize Japan tour, IIoT cert (Uni Sydney 2021), TPS tools, Big Data, RPA.</li>
+        </ul>
+        <h4>His own words (mirror these)</h4>
+        <ul>
+          <li>"Lean Manufacturing culture", "Industry 4.0 initiatives and Big Data analysis"</li>
+          <li>"Standardized Work", "OEE, Kaizen, VSM, Visual factory"</li>
+          <li>"Cost and Results driven", "Strategy oriented, Business and analytic focused"</li>
+          <li>Multilingual: Spanish, English, Italian, French</li>
+        </ul>
+        <h4>What he likely cares about</h4>
+        <ul>
+          <li>NCR turnaround speed — when the line is waiting, quality can't be the bottleneck</li>
+          <li>Compliance vs production: registrations, change control and supplier rejects must not stall shipments</li>
+          <li>Quality KPIs he can manage: NCR count/age, CAPA closure, quality cost, audit status</li>
+          <li>New-product industrialization with R&amp;D — launch compliant AND on time</li>
+          <li>Lean/CI credibility on the floor — he'll test your Kaizen/OEE fluency</li>
+        </ul>
+        <h4>Questions to ask him</h4>
+        <ul class="ask">
+          <li>What does the quality function's KPI dashboard look like today — and where does it hurt most?</li>
+          <li>How do you want quality to interact with production — gate or partner?</li>
+          <li>What's the biggest quality pain on the emergency lighting line?</li>
+          <li>How does the ERP upgrade change how quality documentation is managed?</li>
         </ul>
       </div>
     </div>
@@ -574,7 +617,31 @@
     { who:"Erika", type:"Behavioural",
       q:"Tell me about a time a project failed, and what you did.",
       a:"Early in my career I deployed a new SOP set across a site without enough involvement from the operators who'd use them. Adoption was poor and audit findings went up instead of down. The lesson shaped my whole approach: I re-ran the rollout as workshops with the operators co-authoring the procedures — adoption flipped, and the audits went clean. Since then, every system I've implemented — QMS migrations, dashboards, Kaizen programs — has been built with the people who use it, which is why my results tend to stick.",
-      why:"Erika recruits for culture; this answer shows humility, learning and no blame-shifting." }
+      why:"Erika recruits for culture; this answer shows humility, learning and no blame-shifting." },
+    { who:"Daniel", type:"Ops",
+      q:"How do you keep quality from slowing production — what happens when the line is waiting on an NCR decision?",
+      a:"Speed comes from pre-agreed decision rules, not from skipping quality. I run risk-based containment: quarantine the suspect batch, keep conforming product flowing, and hit a defined disposition window — at Stramit I established a go/no-go statistical sampling framework precisely so the line had an instant decision instead of a committee meeting. In the metal-fabrication Kaizen, we cut scrap 22% — worth $750K a year — while speeding decisions, not relaxing them. Quality that's slow is usually quality without a decision protocol; the protocol is the fix.",
+      why:"Daniel owns production KPIs — he's testing whether quality is a gate or a partner. Answer with a system + a number." },
+    { who:"Daniel", type:"Ops",
+      q:"We manufacture emergency lighting right here. Talk me through the certification side of a locally made emergency product.",
+      a:"A locally made emergency luminaire wears two hats. As a luminaire it's EESS Level 2 — tested to AS/NZS 60598.1 plus Part 2.22 for emergency, registered, RCM applied. As emergency lighting it's ActivFire — AF-F001 application, evaluation plan, CoC to AS 2293.3, register listing, and from this year FPC factory audits that are essentially ISO 9001 audits on the production floor. Local manufacturing makes the evidence side strong: production-state samples walk to the lab in a day, and change control is the discipline that keeps the certified product and the built product identical — a PCBA change triggers re-assessment before it hits the line.",
+      why:"This is HIS old floor (emergency lighting production 2015–18). Showing you know the Galaxy line's two-scheme story earns instant credibility." },
+    { who:"Daniel", type:"Ops",
+      q:"A supplier's batch fails incoming inspection at 3pm and the line needs it tomorrow. What do you do?",
+      a:"Contain first, decide fast, fix the source. Quarantine the batch, check whether it's a repeat offender or a first fail, and open the deviation with documented risk — can we use it under concession, or is it reject? Then the supplier gets a corrective action request that same day, tied to their scorecard — I built a supplier performance dashboard that drove a 25% compliance improvement, so failures are visible and negotiation-ready, not buried in a filing cabinet. And I'd protect the line: expedite conforming stock or rework options while the CAPA runs, because tomorrow's production is a real constraint.",
+      why:"A scenario question designed to see if you think in production realities — timeline, cost, and supplier accountability together." },
+    { who:"Daniel", type:"Ops",
+      q:"What KPIs would you put on the quality function's dashboard — and how do you run it?",
+      a:"A handful that production can act on: NCR count and age, CAPA closure rate, cost of quality — scrap, rework, warranty — plus certification health: CoC expiries, registration status, audit findings open. I'd automate the reporting: I've built Power BI dashboards that cut reporting lead time by 70%, and real-time incident views that took investigation time from 72 hours to under 24. The point of the dashboard is not reporting — it's making the next decision obvious, whether that's a supplier, a line, or a certification running out.",
+      why:"He lives on KPIs (production performance, service level, quality control, expenses are literally his listed scope). Speak his language." },
+    { who:"Daniel", type:"Ops",
+      q:"Tell me about a lean project you actually ran on a production floor.",
+      a:"The metal-fabrication Kaizen: cross-functional team, 5 Whys and Fishbone at the line, and we eliminated 22% scrap — $750K a year — while improving how customers perceived product quality. Before that, in packaging: DMAIC on a PET line cut defects 20% and raised throughput 25%, saving $1.2M annually. And at Medtronic I drove changeover from 45 to 15 minutes through SMED thinking, worth $2M a year, and took OEE to 86%. The pattern is the same every time: measure the loss, involve the operators, standardize the fix, and bank the result.",
+      why:"He's Shingo-trained with a Lean Japan tour behind him — real floor stories with real numbers are the only currency." },
+    { who:"Daniel", type:"Ops",
+      q:"How do you industrialize a new product with R&D so it launches compliant — not just on time?",
+      a:"Compliance rides the same track as industrialization: the compliance gate sits inside the design review — risk level, standards and registration pathway decided before tooling locks. Then FAT and SAT on the line, validation of the process, and certification runs in parallel so the CoC and the production start date meet. I've done this from both sides — I launched 50+ products a year at Bticino with UL, IEC and ANCE certifications, coordinating R&D, production, purchasing and quality around one timeline. A launch that's on time but not registered isn't a launch — it's a recall waiting.",
+      why:"Mirrors his exact Bticino experience (product launches with UL/IEC/ANCE certs) and connects quality to Paul's R&D world." }
   ];
 
   var filtered = CARDS.slice();
@@ -615,7 +682,7 @@
   renderCard();
 
   /* ---------- interviewer expand ---------- */
-  ["cardPaul","cardErika"].forEach(function(id){
+  ["cardPaul","cardErika","cardDaniel"].forEach(function(id){
     document.getElementById(id).addEventListener("click", function(){ this.classList.toggle("expanded"); });
   });
 
